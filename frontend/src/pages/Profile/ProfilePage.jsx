@@ -72,16 +72,18 @@ useEffect(() => {
   return (
 
       
-        <div className="min-h-screen w-full overflow-hidden">
+        <div>
             { profileData && (
               <div>
               <UserInfo />
+              <div className="min-h-screen w-full overflow-hidden mx-auto px-10">
               <UserAbout data={profileData.about} />
               <Experience data={profileData.cv_experiences} />
               <Education data={profileData.cv_educations} />
               <Projects data={profileData.cv_projects} />
               <Skills data={profileData.cv_skills} />
               <Languages data={profileData.cv_languages} />
+              </div>
             </div>
             ) 
           }

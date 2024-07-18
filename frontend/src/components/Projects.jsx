@@ -1,22 +1,27 @@
 import React from "react";
 
+const ProjectCard = ({ index, project_name, description }) => {
+  return (
+    <div className="codefoliobg-gray p-4 rounded-lg shadow-md w-full sm:w-[30%] mt-8 c">
+      <div className='mt-5 '>
+        <h3 className='font-bold text-[24px] text-white'>{project_name}</h3>
+        <p className='mt-2 text-[14px] text-white'>{description}</p>
+      </div>
+    </div>
+  );
+};
+
 const Projects = ({ data }) => {
   const projectsList = data || [];
 
   return (
-    <div className="deneme p-4 rounded-lg shadow-md mt-8 mx-auto max-w-6xl">
-    <h2 className="text-xl font-bold text-gray-800 mb-2 codefolio-yellow">Projects</h2>
-    <ul className="list-disc ml-4 text-white">
+    <div>
+      <h2 className="cv-title">Projects</h2>
+      <div className="flex flex-wrap justify-between gap-6">
         {projectsList.map((item, index) => (
-          <li key={index} className="mb-4">
-            
-            <div className="ml-6">
-              <p className="text-base font-medium text-white">{item.project_name}</p>
-              <p className="text-bas font-small text-white">{item.description}</p>
-            </div>
-          </li>
+          <ProjectCard key={`project-${index}`}  index={index} {...item} />
         ))}
-      </ul>
+      </div>
     </div>
   );
 };

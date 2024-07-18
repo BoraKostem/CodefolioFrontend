@@ -4,8 +4,10 @@ const Experience = ({ data }) => {
   const experienceList = data || [];
 
   return (
-    <div className="deneme sm:p-4 rounded-lg shadow-md mt-8 mx-auto max-w-6xl">
-      <h2 className="text-xl font-bold text-gray-800 mb-2 codefolio-yellow">Experience</h2>
+    <>
+    <h2 className="cv-title">Experience</h2>
+    <div className="cv-container">
+      
        <ul className="list-disc ml-4 text-white">
         {experienceList.map((item, index) => (
           <li key={index} className="mb-4">
@@ -20,6 +22,7 @@ const Experience = ({ data }) => {
         ))}
       </ul> 
     </div>
+    </>
   );
 };
 

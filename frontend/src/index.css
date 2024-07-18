@@ -66,5 +66,14 @@ code {
 }
 
 .deneme{
-  background-color: rgba(94, 96, 99, 0.9);
+  background-color: rgba(185, 185, 183, 0.328);
+}
+
+
+.cv-title {
+  @apply text-3xl font-bold codefolio-yellow mb-2 mt-5 ;
+}
+
+.cv-container {
+  @apply sm:p-4 rounded-lg shadow-md mt-8 mx-auto codefoliobg-gray;
 }
