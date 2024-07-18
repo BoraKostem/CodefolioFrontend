@@ -1,0 +1,70 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+
+.codefolio-yellow {
+  color: #F4CE14;
+  ;
+}
+
+.codefolio-green {
+  color:#379777;
+  ;
+}
+
+.codefolio-gray{
+  color:#45474B;
+
+}
+.codefolio-white{
+  color:#F5F7F8;
+
+}
+.codefoliobg-white{
+  background-color:#F5F7F8;
+}
+.codefoliobg-gray{
+  background-color: #45474B;
+}
+.codefoliobg-yellow{
+  background-color: #F4CE14;
+}
+.codefoliobg-green{
+  background-color: #379777;
+}
+.codefolio-yellow-border {
+  border: 2px solid #F4CE14;
+  color: #F4CE14;
+}
+.codefolio-white-border {
+  border: 2px solid #F5F7F8;
+  color: #F5F7F8;
+}
+.codefolio-green-border {
+  border: 2px solid #379777;
+  color: #379777;
+}
+.codefolio-gray-border {
+  border: 2px solid #45474B;
+  color: #45474B;
+}
+
+.deneme{
+  background-color: rgba(94, 96, 99, 0.9);
+}
