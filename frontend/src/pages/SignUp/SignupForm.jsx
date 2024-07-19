@@ -8,7 +8,8 @@ import * as Yup from 'yup';
 const SignupForm = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-
+    const navigate = useNavigate();
+    
     const initialValues = {
         email: '',
         fullName: '',
@@ -45,6 +46,7 @@ const SignupForm = () => {
 
             const data = await response.json();
             console.log('User created successfully:', data);
+            navigate('/login');
             resetForm();
             
         } catch (error) {

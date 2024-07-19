@@ -5,7 +5,7 @@ import profilePic from "../assets/profilepic.png";
 const UserInfo = () => {
  
   return (
-    <div className="h-full w-96 sm:w-full relative flex flex-col items-center">
+    <div className="h-full w-full relative flex flex-col items-center">
       {/* Background Image */}
       <div className="h-40 w-full bg-cover bg-center">
         <img src={backgroundImage} className="w-full h-full object-cover" alt="profileBg" />
