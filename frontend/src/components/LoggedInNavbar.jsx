@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import profilepic from "../assets/profilepic.png";
 
-const UserNavbar = () => {
+const LoggedInNavbar = () => {
     const [isOpen, setIsOpen] = useState(false);
 
     const buttonClasses =
@@ -15,18 +16,11 @@ const UserNavbar = () => {
             <Link to="/contact">
                 <button className={buttonClasses}>Contact</button>
             </Link>
-            
-            <Link to="/signup">
-                <button className={buttonClasses}>Signup</button>
-            </Link>
-            <Link to="/login">
-            <button className={buttonClasses}>Login</button>
-            </Link>
         </>
     );
 
     return (
-        <nav className="bg-[#45474B] text-[#F5F7F8] fixed w-full">
+        <nav className="bg-[#45474B] text-[#F5F7F8] fixed w-full z-50">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex items-center justify-between h-16">
                     <div className="flex flex-row w-full justify-between">
@@ -39,14 +33,14 @@ const UserNavbar = () => {
                     </div>
                     <div className="md:hidden">
                         <button onClick={() => setIsOpen(!isOpen)} type="button" className="fill-gray-100">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M3 6H21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                                <path d="M3 12H21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                                <path d="M3 18H21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                        </svg>
-                            
-                        </button>
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M3 6H21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                                <path d="M3 12H21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                                <path d="M3 18H21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                            </svg>
+                        </button>                      
                     </div>
+                    <img src={profilepic} alt="profilepic" className="w-8 h-8 rounded-full ml-2" />
                 </div>
             </div>
             {isOpen && (
@@ -56,4 +50,4 @@ const UserNavbar = () => {
     );
 };
 
-export default UserNavbar;
+export default LoggedInNavbar;
