@@ -41,7 +41,7 @@ const Settings = () => {
     return (
         <div className='w-screen h-screen codefoliobg-white'>
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-                <div className="border-b border-gray-900/10 pb-12">
+                <div className="border-b mt-10 border-gray-900/10 pb-12">
                     <h1 className='border-b border-gray-900/10 pb-2 text-4xl text-center font-bold codefolio-yellow tracking-widest mb-6'>Settings</h1>
                     <div className="grid grid-cols-1 gap-y-8 sm:grid-cols-6">
                         {/* Photo Section */}
