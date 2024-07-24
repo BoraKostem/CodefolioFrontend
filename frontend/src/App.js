@@ -2,6 +2,7 @@
 import './App.css';
 
 //pages
+import AboutPage from './pages/About/AboutPage';
 import LoginPage from "./pages/Login/LoginPage";
 import HomePage from './pages/Home/HomePage';
 import SignupPage from './pages/SignUp/SignupPage';
@@ -21,6 +22,7 @@ function App() {
           <Route path="/dashboard" element={<DashboardPage/>}/>
           <Route path="/profile" element={<ProfilePage/>}/>
           <Route path="/settings" element={<SettingsPage/>}/>
+          <Route path="/about" element={<AboutPage/>}/>
         </Routes>
       </Router>
     </div>
