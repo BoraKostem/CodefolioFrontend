@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import '../../CSS/About.css'; 
 
 const About = () => {
@@ -33,7 +34,9 @@ const About = () => {
             <br />
             <h2>Get Started</h2>
             <p>
-                Ready to showcase your skills and land your dream job? Sign up today and create your Codefolio profile in minutes!
+    color: #F4CE14;
+    color: #F4CE14;
+    Ready to showcase your skills and land your dream job? < Link to="/signup" style={{ color:'#F4CE14'}}>Sign up</Link>  today and create your Codefolio profile in minutes!
             </p>
         </div>
     );
