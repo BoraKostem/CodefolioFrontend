@@ -26,7 +26,6 @@ const LoginForm = () => {
             }
 
             const data = await response.json();
-            localStorage.setItem('refreshToken', data.refresh);
             localStorage.setItem('accessToken', data.access);
             console.log('accessToken:', data.access);
             navigate('/');

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext, createContext } from 'react';
 
 import UserInfo from './UserInfo';
 import UserAbout from './UserAbout';
@@ -9,20 +9,16 @@ import Skills from './Skills';
 import Languages from './Languages';
 
 
+export const fetchContext = React.createContext();
+
 const ProfileDataLoader = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [profileData, setProfileData] = useState(null);
+    const [fetchCntrl, setFetchCntrl] = useState(false);
   useEffect(() => {
     const fetchData = async () => {
       try {
         const accessToken = localStorage.getItem('accessToken');
-        const refreshToken = localStorage.getItem('refreshToken');
-  
-        if (!accessToken || !refreshToken) {
-          setIsLoading(false);
-          return;
-        }
-  
         // Fetch profile data using the access token
         const response = await fetch('http://ec2-3-76-221-49.eu-central-1.compute.amazonaws.com:8000/api/profile/cv', {
           headers: {
@@ -30,34 +26,11 @@ const ProfileDataLoader = () => {
           }
         });
   
-        if (!response.ok) {
-          if (response.status === 401) {
-            // Access token expired, attempt to refresh
-            const refreshResponse = await fetch('http://ec2-3-76-221-49.eu-central-1.compute.amazonaws.com:8000/api/token/refresh', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json'
-              },
-              body: JSON.stringify({ refresh: refreshToken })
-            });
-  
-            if (!refreshResponse.ok) {
-              console.error('Failed to refresh access token');
-              setIsLoading(false);
-              return;
-            }
-  
-            const refreshedData = await refreshResponse.json();
-            localStorage.setItem('accessToken', refreshedData.access);
-            setProfileData(refreshedData);
-          } else {
-            throw new Error('Failed to fetch profile data');
-          }
-        } else {
+        
           const data = await response.json();
           console.log('Profile data:', data);
           setProfileData(data.content);
-        }
+        
   
         setIsLoading(false);
       } catch (error) {
@@ -67,7 +40,7 @@ const ProfileDataLoader = () => {
     };
   
     fetchData();
-  }, []);
+  }, [fetchCntrl]);
   
     return (
   
@@ -75,6 +48,7 @@ const ProfileDataLoader = () => {
           <div>
               { profileData && (
                 <div>
+                  <fetchContext.Provider value={[fetchCntrl, setFetchCntrl]}>
                 <UserInfo />
                 <div className="min-h-screen w-full overflow-hidden mx-auto px-10">
                 <UserAbout data={profileData.about} />
@@ -84,6 +58,7 @@ const ProfileDataLoader = () => {
                 <Skills data={profileData.cv_skills} />
                 <Languages data={profileData.cv_languages} />
                 </div>
+                </fetchContext.Provider>
               </div>
               ) 
             }

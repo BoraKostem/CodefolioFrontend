@@ -78,3 +78,7 @@ code {
 .cv-container {
   @apply sm:p-4 rounded-lg shadow-md mt-8 mx-auto codefoliobg-gray;
 }
+
+.fixed-width {
+  width: 200px; /* Adjust the width as needed */
+}

@@ -1,14 +1,20 @@
-import React, { useState } from "react";
-import EditProjectModal from "./EditProjectModal";
+import React, { useContext, useState, useEffect} from "react";
+import EditProjectModal from "./dialogModals/EditProjectModal";
+import AddProjectModal from "./dialogModals/AddProjectModal";
+import { context } from "../pages/Profile/ProfilePage";
+import { fetchContext } from "./ProfileDataLoader";
 
-const ProjectCard = ({ index, project_id, project_name, description, cv_project_languages = [], onEdit, onDelete }) => {
+const ProjectCard = ({ index, id, project_name, description, cv_project_languages = [], onEdit, onDelete }) => {
+  const [edit, setEdit] = useContext(context);
   const languageNames = cv_project_languages.map(lang => lang.language).join(", ");
   return (
-    <div className="codefoliobg-gray p-4 rounded-lg shadow-md w-full sm:w-[30%] mt-8 c">
-      <div className="flex flex-row justify-end">
-        <button onClick={() => onEdit(index)} className="text-white mr-2 hover:text-blue-300">✏️</button>
-        <button onClick={() => onDelete(project_id)} className="text-white hover:text-red-300">🗑️</button>
-      </div>
+    <div className="codefoliobg-gray p-4 rounded-lg shadow-md w-full sm:w-[30%] h-full mt-8 c">
+      {edit && (
+        <div className="flex flex-row justify-end">
+          <button onClick={() => onEdit(index)} className="text-white mr-2 hover:text-blue-300">✏️</button>
+          <button onClick={() => onDelete(id)} className="text-white hover:text-red-300">🗑️</button>
+        </div>
+      )}
       <div className='mt-5'>
         <div className="flex justify-center">
           <h3 className='font-bold text-[24px] text-white justify-center'>{project_name}</h3>
@@ -24,45 +30,38 @@ const Projects = ({ data }) => {
   const [projectsList, setProjectsList] = useState(data || []);
   const [selectedProject, setSelectedProject] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+  const [edit, setEdit] = useContext(context);
+  const [fetchCntrl, setFetchCntrl] = useContext(fetchContext);
+
+  useEffect(() => {
+    setProjectsList(data);
+  }, [data]);
 
   const handleEdit = (index) => {
     setSelectedProject(projectsList[index]);
     setIsModalOpen(true);
   };
 
-  const handleSave = async (id, updatedData) => {
-
-    try {
-        const accessToken = localStorage.getItem('accessToken');
-      const response = await fetch(`http://ec2-3-76-221-49.eu-central-1.compute.amazonaws.com:8000/api/profile/cv/project/edit`, {
-        method: "PATCH",
-        headers: { 
-            "Content-Type": "application/json",
-            'Authorization': `Bearer ${accessToken}`
-         },
-        body: JSON.stringify({ id, ...updatedData })
-      });
-      if (response.ok) {
-        const updatedProjectsList = projectsList.map(project => 
-          project.id === id ? { ...project, ...updatedData } : project
-        );
-        setProjectsList(updatedProjectsList);
-        setIsModalOpen(false);
-      }
-    } catch (error) {
-      console.error("Failed to update project", error);
-    }
-  };
 
   const handleDelete = async (project_id) => {
+    
+    console.log(project_id);
     try {
-      const response = await fetch(`<ip>/api/profile/cv/project/delete`, {
+      const accessToken = localStorage.getItem('accessToken');
+      const response = await fetch(`http://ec2-3-76-221-49.eu-central-1.compute.amazonaws.com:8000/api/profile/cv/project/delete`, {
         method: "DELETE",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ project_id })
+        headers: { 
+          "Content-Type": "application/json", 
+          "Authorization" : `Bearer ${accessToken}`
+
+        },
+
+        body: JSON.stringify({ "project_id": project_id })
       });
       if (response.ok) {
-        setProjectsList(projectsList.filter(project => project.project_id !== project_id));
+        console.log("project deleted successfully")
+        setFetchCntrl(!fetchCntrl);
       }
     } catch (error) {
       console.error("Failed to delete project", error);
@@ -72,7 +71,15 @@ const Projects = ({ data }) => {
   return (
     <div>
       <h2 className="cv-title">Projects</h2>
-      <div className="flex flex-wrap justify-between gap-6">
+      {edit && (
+        <button
+          onClick={() => setIsAddModalOpen(true)}
+          className="flex text-white font-bold codefoliobg-yellow rounded p-3 justify-end"
+        >
+          + Add New Projects
+        </button>
+      )}
+      <div className="flex flex-wrap justify-start gap-6">
         {projectsList.map((item, index) => (
           <ProjectCard
             key={`project-${index}`}
@@ -83,12 +90,15 @@ const Projects = ({ data }) => {
           />
         ))}
       </div>
+      <AddProjectModal
+          isOpen={isAddModalOpen}
+          onRequestClose={() => setIsAddModalOpen(false)}
+        />
       {selectedProject && (
         <EditProjectModal
           isOpen={isModalOpen}
           onRequestClose={() => setIsModalOpen(false)}
           project={selectedProject}
-          onSave={handleSave}
         />
       )}
     </div>

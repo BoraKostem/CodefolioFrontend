@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 const UserNavbar = () => {
     const [isOpen, setIsOpen] = useState(false);
+    
 
     const buttonClasses =
         "text-gray-100 font-bold text-sm px-2 py-1 hover:bg-gray-100 hover:text-gray-800 rounded-lg transition duration-300";
