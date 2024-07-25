@@ -8,6 +8,7 @@ import SignupPage from './pages/SignUp/SignupPage';
 import DashboardPage from './pages/Dashboard/DashboardPage';
 import ProfilePage from './pages/Profile/ProfilePage';
 import SettingsPage from './pages/Settings/SettingsPage';
+import AboutPage from './pages/About/AboutPage';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
           <Route path="/dashboard" element={<DashboardPage/>}/>
           <Route path="/profile" element={<ProfilePage/>}/>
           <Route path="/settings" element={<SettingsPage/>}/>
+          <Route path="/about" element={<AboutPage/>}/>
         </Routes>
       </Router>
     </div>
