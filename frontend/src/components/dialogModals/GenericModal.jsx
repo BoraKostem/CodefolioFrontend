@@ -1,8 +1,12 @@
 
 import Modal from "react-modal";
+import React, {useState} from "react";
+import ClipLoader from "react-spinners/ClipLoader";
+import { faL } from "@fortawesome/free-solid-svg-icons";
 
 // Generic Modal Component
 const GenericModal = ({ isOpen, onRequestClose, title, children, onSave }) => {
+
   return (
     <Modal
       isOpen={isOpen}

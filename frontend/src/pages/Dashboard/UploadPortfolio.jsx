@@ -52,8 +52,8 @@ const UploadPortfolio = () => {
     };
 
     return (
-        <div className='w-full mt-20 h-full flex items-center justify-center'>
-            <div className='lg:w-1/3 sm:w-1/2 h-auto flex flex-col p-10 justify-between codefoliobg-gray rounded-md'>
+        <div className='w-full h-full flex items-center justify-center'>
+            <div className='mt-20 lg:w-1/3 sm:w-1/2 h-auto flex flex-col p-10 justify-between codefoliobg-gray rounded-md'>
                 <h1 className='text-4xl text-center font-bold codefolio-yellow tracking-widest mb-6'>Upload Portfolio</h1>
                 <form onSubmit={handleSubmit} className='flex flex-col'>
                     <label className='text-lg codefolio-white mb-2'>Location</label>

@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react'
 import EditForm from './EditForm'
-import Navbar from "../../components/LoggedInNavbar";
 import Footer from '../../components/Footer';
 import { useNavigate } from 'react-router-dom';
 

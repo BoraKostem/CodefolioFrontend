@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Modal from "react-modal";
 import GenericModal from "./GenericModal";
 
+
 Modal.setAppElement('#root');
 
 const EditSkillsModal = ({ isOpen, onRequestClose, skills, onDelete, onAdd }) => {
@@ -13,7 +14,7 @@ const EditSkillsModal = ({ isOpen, onRequestClose, skills, onDelete, onAdd }) =>
 
 
   const handleAdd = async () => {
-    
+      
       setAddArr(prev => [...prev, newSkill]);
       setSkillsList(prev => [...prev, {"skill": newSkill}]);
       setNewSkill(''); // Clear the input field after adding
@@ -26,7 +27,7 @@ const EditSkillsModal = ({ isOpen, onRequestClose, skills, onDelete, onAdd }) =>
   }
 
   const handleUpdates = async() => {
-    
+
     try {
         const accessToken = localStorage.getItem('accessToken');
         for(let skill of addArr){
@@ -77,7 +78,6 @@ const EditSkillsModal = ({ isOpen, onRequestClose, skills, onDelete, onAdd }) =>
       }
 
       onRequestClose();
-  
     }
 
   

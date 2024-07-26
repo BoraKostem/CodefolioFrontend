@@ -8,7 +8,7 @@ import Education from "../../components/Education";
 import Projects from "../../components/Projects";
 import Skills from "../../components/Skills";
 import Languages from "../../components/Languages";
-import LoggedInNavbar from "../../components/LoggedInNavbar";
+import ProfileNavbar from "../../components/Navbars/ProfileNavbar";
 import ProfileDataLoader from "../../components/ProfileDataLoader";
 import LoginPage from ".././Login/LoginPage";
 import { useAsyncError } from "react-router-dom";
@@ -62,7 +62,7 @@ const ProfilePage = () => {
   return (
     <div>
       <context.Provider value={[edit, setEdit]}>
-        <LoggedInNavbar></LoggedInNavbar>
+        <ProfileNavbar></ProfileNavbar>
         <ProfileDataLoader></ProfileDataLoader>
       </context.Provider>
     </div>

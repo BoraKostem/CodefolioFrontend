@@ -1,13 +1,13 @@
 import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
-import profilepic from "../assets/profilepic.png";
-import { settingsLinks } from "../constants";
-import { context } from "../pages/Profile/ProfilePage";
+import { useNavigate } from "react-router-dom";
 
-const LoggedInNavbar = () => {
+import profilepic from "../../assets/profilepic.png";
+
+
+const UserNavbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [togglePicture, setTogglePicture] = useState(false);
-  const [edit, setEdit] = useContext(context) || [false, () => {}];
+  const navigate = useNavigate();
 
   const buttonClasses =
     "text-gray-100 font-bold text-sm px-2 py-1 hover:bg-gray-100 hover:text-gray-800 rounded-lg transition duration-300";
@@ -20,6 +20,15 @@ const LoggedInNavbar = () => {
       <Link to="/contact">
         <button className={buttonClasses}>Contact</button>
       </Link>
+      <img
+            src={profilepic}
+            alt="profilepic"
+            onClick={() => {
+              navigate("/Profile");
+            }}
+            className="w-8 h-8 rounded-full ml-2"
+       />
+       
     </>
   );
 
@@ -36,7 +45,7 @@ const LoggedInNavbar = () => {
               Codefolio
             </Link>
             <div className="hidden md:block">
-              <div className="flex ml-10 items-baseline space-x-2">
+              <div className="flex ml-10 space-x-2 justify-center">
                 {buttons}
               </div>
             </div>
@@ -78,52 +87,11 @@ const LoggedInNavbar = () => {
               </svg>
             </button>
           </div>
-          <img
-            src={profilepic}
-            alt="profilepic"
-            onClick={() => {
-              setTogglePicture(!togglePicture);
-            }}
-            className="w-8 h-8 rounded-full ml-2"
-          />
-          <div
-            className={`${
-              !togglePicture ? "hidden" : "flex"
-            } p-10 codefoliobg-yellow absolute top-16 font-bold right-0 mx-8 my-2 min-w[140px] z-10 rounded-xl fixed-width`}
-          >
-            <ul className="list-none flex justify-end items-start flex-col gap-4 ">
-              <li>
-                <Link
-                  to={"/profile"}
-                  className="hover:text-codefolio-gray"
-                  onClick={() => {
-                    setEdit(!edit);
-
-                  }}
-                >
-                  {!edit ? "Edit My Profile" : "Quit Editting"}
-                </Link>
-              </li>
-              <li>
-                <Link to="/settings" className="hover:text-codefolio-gray">
-                  Settings
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/login"
-                  onClick={() => localStorage.removeItem("accessToken")}
-                  className="hover:text-codefolio-gray"
-                >
-                  Log out
-                </Link>
-              </li>
-            </ul>
-          </div>
+          
         </div>
       </div>
       {isOpen && (
-        <div className="flex flex-col gap-y-2 md:hidden px-4 sm:px-6 pb-2">
+        <div className="flex flex-col gap-y-2 md:hidden px-4 sm:px-6 pb-2 items-center">
           {buttons}
         </div>
       )}
@@ -131,4 +99,4 @@ const LoggedInNavbar = () => {
   );
 };
 
-export default LoggedInNavbar;
+export default UserNavbar;
