@@ -63,7 +63,7 @@ const Education = ({ data }) => {
               </div>
             <div className="ml-6">
               <p className="text-left font-medium text-white">{item.degree}</p>
-              <p className="text-left text-white">{item.start_date}</p>
+              <p className="text-left text-white">{item.start_date} - {item.end_date}</p>
             </div>
           </li>
         ))}

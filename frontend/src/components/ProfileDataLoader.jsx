@@ -7,6 +7,7 @@ import Education from './Education';
 import Projects from './Projects';
 import Skills from './Skills';
 import Languages from './Languages';
+import Certificate from './Certificate';
 
 
 export const fetchContext = React.createContext();
@@ -55,6 +56,7 @@ const ProfileDataLoader = () => {
                 <Experience data={profileData.cv_experiences} />
                 <Education data={profileData.cv_educations} />
                 <Projects data={profileData.cv_projects} />
+                <Certificate data={profileData.cv_certifications} />
                 <Skills data={profileData.cv_skills} />
                 <Languages data={profileData.cv_languages} />
                 </div>

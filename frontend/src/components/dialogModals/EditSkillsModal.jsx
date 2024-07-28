@@ -77,7 +77,6 @@ const EditSkillsModal = ({ isOpen, onRequestClose, skills, onDelete, onAdd }) =>
         console.error("Failed to delete skill:", error);
       }
 
-      onRequestClose();
     }
 
   

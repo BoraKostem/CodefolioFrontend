@@ -102,7 +102,7 @@ const ProfileNavbar = () => {
                   className="hover:text-codefolio-gray"
                   onClick={() => {
                     setEdit(!edit);
-
+                    setTogglePicture(!togglePicture);
                   }}
                 >
                   {!edit ? "Edit My Profile" : "Quit Editting"}

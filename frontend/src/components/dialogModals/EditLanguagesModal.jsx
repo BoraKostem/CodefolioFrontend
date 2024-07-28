@@ -74,7 +74,7 @@ const EditLanguagesModal = ({ isOpen, onRequestClose, languages, onDelete, onAdd
         console.error("Failed to delete skill:", error);
       }
 
-      onRequestClose();
+
   
     }
 

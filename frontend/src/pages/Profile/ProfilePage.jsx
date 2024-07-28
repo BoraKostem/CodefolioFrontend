@@ -35,7 +35,7 @@ const ProfilePage = () => {
   const resetSessionTimeout = () => {
     clearTimeout(sessionTimeoutId);
     sessionTimeoutId = setTimeout(() => {
-      localStorage.removeItem("access_token");
+      localStorage.removeItem("accessToken");
       setIsAuthenticated(false);
       navigate("/login");
     }, SessionTimeout);

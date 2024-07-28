@@ -1,35 +1,34 @@
 import React, { useContext, useEffect, useState } from "react";
 import { context } from "../pages/Profile/ProfilePage";
-import AddExperienceModal from "./dialogModals/AddExperienceModal";
+import AddCertificateModal from "./dialogModals/AddCertificateModal";
 import { fetchContext } from "./ProfileDataLoader";
 
-const Experience = ({ data }) => {
-  const [experienceList, setExperienceList] = useState(data || []);
+const Certificate = ({ data }) => {
+  const [certificateList, setCertificateList] = useState(data || []);
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   
   const [edit, setEdit] = useContext(context);
   const [fetchCntrl, setFetchCntrl] = useContext(fetchContext);
   
   useEffect(() => {
-    setExperienceList(data);
+    setCertificateList(data);
   },[data]);
 
   const handleEdit = () => {
     setIsAddModalOpen(!isAddModalOpen);
   };
 
-
-  const deleteExperience = async(experienceId) => {
-    console.log(experienceId);
+  const deleteCertificate = async(certificateId) => {
+    console.log(certificateId);
     try{
       const accessToken = localStorage.getItem('accessToken');
-      const response = await fetch('http://ec2-3-76-221-49.eu-central-1.compute.amazonaws.com:8000/api/profile/cv/experience',{
+      const response = await fetch('http://ec2-3-76-221-49.eu-central-1.compute.amazonaws.com:8000/api/profile/cv/certification',{
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
           "Authorization": `Bearer ${accessToken}`
         },
-        body: JSON.stringify({"experience_id": experienceId})
+        body: JSON.stringify({"certification_id": certificateId})
       })
       if(response.ok){
         console.log("deleted successfully");
@@ -41,53 +40,46 @@ const Experience = ({ data }) => {
     }
   };
 
+
   return (
     <>
-      <h2 className="cv-title">Experience</h2>
+      <h2 className="cv-title">Certifications</h2>
       {edit && (
         <button
           onClick={handleEdit}
           className="flex text-white font-bold codefoliobg-yellow rounded p-3 justify-end"
         >
-          + Add New Experience
+          + Add New Certification
         </button>
       )}
       <div className="cv-container">
         <ul className="list-disc ml-4 text-white">
-          {experienceList.map((item, index) => (
+          {certificateList.map((item, index) => (
             <li key={index} className="mb-4">
               <div className="flex justify-between">
                 <h3 className="text-lg font-bold text-white flex justify-start">
-                  {item.position}
+                  {item.certification_name} <span className="text-white font-normal"> &nbsp; {item.date}</span>
                 </h3>
                 {edit && (
-                  <button onClick={() => deleteExperience(item.id)}className="text-white hover:text-red-300 px-5">
+                  <button onClick={() => deleteCertificate(item.id)}className="text-white hover:text-red-300 px-5">
                     🗑️
                   </button>
                 )}
               </div>
-              <div className="ml-6">
-                <p className="text-base font-medium text-white flex justify-start">
-                  {item.company_name}
-                </p>
-                <p className="text-base text-white flex justify-start">
-                  {item.location}
-                </p>
-                <p className="text-base text-white flex justify-start">
-                  {item.start_date} - {item.end_date}
-                </p>
+              <div>      
                 <p className="text-white flex text-left">{item.description}</p>
+                <p className="text-white flex text-left">{item.url}</p>
               </div>
             </li>
           ))}
         </ul>
-        <AddExperienceModal
+        <AddCertificateModal
           isOpen={isAddModalOpen}
           onRequestClose={handleEdit}
         />
       </div>
     </>
-  );
-};
+  )
+}
 
-export default Experience;
+export default Certificate;
