@@ -3,35 +3,10 @@ import React, { useState } from 'react';
 const EditPopup = ({ field, userData, onClose }) => {
     const [value, setValue] = useState(userData[field]);
 
-    const handleSave = async() => {
-        
-        try {
-           
-            const response = await fetch('http://ec2-3-76-221-49.eu-central-1.compute.amazonaws.com:8000/api/profile/cv/upload', {
-                method: 'POST',
-                headers: {
-                    'Authorization': `Bearer ${accessToken}`
-                },
-                body: formData
-            });
-
-            if (!response.ok) {
-                if (response.status === 401) {
-                    console.error('Unauthorized: Access token expired or invalid');
-                } else {
-                    throw new Error('Failed to upload CV');
-                }
-                return;
-            }
-
-            const data = await response.json();
-            console.log(data);
-     
-
-            navigate('/profile');
-        } catch (error) {
-            console.error('Error:', error);
-        }
+    const handleSave = () => {
+        // Update user data logic here
+        // Example: axios.post('/api/user/update', { [field]: value })
+        console.log(`Updated ${field}:`, value);
         onClose();
     };
 
