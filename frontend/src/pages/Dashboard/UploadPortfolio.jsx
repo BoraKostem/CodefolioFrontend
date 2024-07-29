@@ -30,14 +30,7 @@ const UploadPortfolio = () => {
 
         try {
             setLoading(true);
-            // Simulate the upload time with a delay of 10 seconds
-            await delay(10000);
-            setLoading(false);
-            console.log("CV uploaded successfully (simulation)");
-
-            // Uncomment below for real upload
-            /*
-            const response = await fetch(api, {
+            const response = await fetch('http://ec2-3-76-221-49.eu-central-1.compute.amazonaws.com:8000/api/profile/cv/upload', {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${accessToken}`
@@ -56,13 +49,11 @@ const UploadPortfolio = () => {
 
             const data = await response.json();
             console.log(data);
-            */
+            setLoading(false);
 
             navigate('/profile');
         } catch (error) {
             console.error('Error:', error);
-            alert("Failed to create portfolio. Try again...");
-            setLoading(false);
         }
     };
 
