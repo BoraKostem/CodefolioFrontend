@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import EditPopup from './EditPopup';
-import ChangePasswordPopup from './ChangePasswordPopup';
+import { EditPopup, ChangePasswordPopup, EditNamePopup, EditPhotoPopup, EditCvPopup } from '../../components/Settings';
 
 const Settings = () => {
     const [userData, setUserData] = useState({});
-    const [isEditPopupOpen, setIsEditPopupOpen] = useState(false);
+    const [isEditNamePopupOpen, setIsEditNamePopupOpen] = useState(false);
+    const [isEditPhotoPopupOpen, setIsEditPhotoPopupOpen] = useState(false);
     const [isChangePasswordPopupOpen, setIsChangePasswordPopupOpen] = useState(false);
+    const [isEditCVPopupOpen, setIsEditCVPopupOpen] = useState(false);
+    const [isEditPopupOpen, setIsEditPopupOpen] = useState(false);
     const [editField, setEditField] = useState('');
 
     useEffect(() => {
@@ -18,7 +20,7 @@ const Settings = () => {
             setUserData({
                 email: 'example@example.com', // Static email
                 password: '********', // Hidden password
-                profilePhoto: 'https://picsum.photos/200',
+                profilePhoto: 'https://picsum.photos/200', // Static profile photo
                 fullName: 'Mehmet Akif Yavuz',
                 country: 'Turkey',
                 region: 'Istanbul',
@@ -34,8 +36,20 @@ const Settings = () => {
         setIsEditPopupOpen(true);
     };
 
+    const openEditNamePopup = () => {
+        setIsEditNamePopupOpen(true);
+    };
+
+    const openEditPhotoPopup = () => {
+        setIsEditPhotoPopupOpen(true);
+    };
+
     const openChangePasswordPopup = () => {
         setIsChangePasswordPopupOpen(true);
+    };
+
+    const openEditCVPopup = () => {
+        setIsEditCVPopupOpen(true);
     };
 
     return (
@@ -44,34 +58,35 @@ const Settings = () => {
                 <div className="border-b mt-10 border-gray-900/10 pb-12">
                     <h1 className='border-b border-gray-900/10 pb-2 text-4xl text-center font-bold codefolio-yellow tracking-widest mb-6'>Settings</h1>
                     <div className="grid grid-cols-1 gap-y-8 sm:grid-cols-6">
-                        {/* Photo Section */}
                         <div className="flex flex-col items-center gap-y-3 sm:col-span-3 border p-3 mx-2">
                             <label htmlFor="photo" className="block text-sm font-medium leading-6 text-gray-900">
                                 Photo
                             </label>
-                            <div className="mt-2 flex items-center justify-center gap-x-3">
-                            <div className="h-24 w-24 rounded-full overflow-hidden bg-gray-100">
-                                {userData.profilePhoto ? (
-                                    <img src={userData.profilePhoto} alt="Profile" className='w-full h-full object-cover' />
-                                ) : (
-                                    <span className='codefolio-white'>No Photo</span>
-                                )}
-                            </div>
-                            <button
-                                onClick={() => openEditPopup('profilePhoto')}
-                                type="button"
-                                className="mt-2 rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-                            >
-                                Change Photo
-                            </button>
+                            <div className="mt-2 flex items-center justify-center gap-x-3 relative">
+                                <div className="h-24 w-24 border-2 border-black-100
+                                 rounded-full overflow-hidden bg-gray-100 relative group">
+                                    {userData.profilePhoto ? (
+                                        <img src={userData.profilePhoto} alt="Profile" className='w-full h-full object-cover' />
+                                    ) : (
+                                        <span className='codefolio-black justify-center flex items-center h-full w-full text-center'>No Photo</span>
+                                    )}
+                                    <button
+                                        onClick={() => openEditPhotoPopup()}
+                                        type="button"
+                                        className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full"
+                                    >
+                                        Change Photo
+                                    </button>
+                                </div>
                             </div>
                         </div>
-                        
+
+
                         {/* Email and Password Section */}
                         <div className="flex border p-3 mx-2 flex-col items-center gap-y-3 sm:col-span-3">
                             <div className="flex flex-col sm:flex-row items-center py-5 gap-y-3 sm:col-span-3">
                                 <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900 sm:mr-2">
-                                    Email: 
+                                    Email:
                                 </label>
                                 <input
                                     id="email"
@@ -104,7 +119,7 @@ const Settings = () => {
                                     disabled
                                 />
                                 <button
-                                    onClick={() => openEditPopup('fullName')}
+                                    onClick={() => openEditNamePopup()}
                                     type="button"
                                     className="rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 ml-2"
                                 >
@@ -135,7 +150,7 @@ const Settings = () => {
                                     </a>
                                 )}
                                 <button
-                                    onClick={() => openEditPopup('cv')}
+                                    onClick={() => openEditCVPopup()}
                                     type="button"
                                     className="rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 ml-2"
                                 >
@@ -152,7 +167,7 @@ const Settings = () => {
                                     id="full-name"
                                     name="full-name"
                                     className='codefolio-black bg-gray-100 px-2 py-1.5 rounded-md text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300'
-                                    value= {userData.github}
+                                    value={userData.github}
                                     disabled
                                 />
                                 <a
@@ -181,7 +196,7 @@ const Settings = () => {
                                     id="full-name"
                                     name="full-name"
                                     className='codefolio-black bg-gray-100 px-2 py-1.5 rounded-md text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300'
-                                    value= {userData.medium}
+                                    value={userData.medium}
                                     disabled
                                 />
                                 <a
@@ -206,9 +221,12 @@ const Settings = () => {
             </div>
             {isEditPopupOpen && <EditPopup field={editField} userData={userData} onClose={() => setIsEditPopupOpen(false)} />}
             {isChangePasswordPopupOpen && <ChangePasswordPopup onClose={() => setIsChangePasswordPopupOpen(false)} />}
+            {isEditNamePopupOpen && <EditNamePopup userName={userData.fullName} onClose={() => setIsEditNamePopupOpen(false)} />}
+            {isEditPhotoPopupOpen && <EditPhotoPopup userPhoto={userData.profilePhoto} onClose={() => setIsEditPhotoPopupOpen(false)} />}
+            {isEditCVPopupOpen && <EditCvPopup userCv={userData.cv} onClose={() => setIsEditCVPopupOpen(false)} />}
         </div>
     );
-    
+
 }
 
 export default Settings;
