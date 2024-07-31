@@ -57,18 +57,23 @@ const UploadPortfolio = () => {
         }
     };
 
+    // Function to handle "Skip for now" click
+    const handleSkip = () => {
+        navigate('/'); // Or wherever you want to navigate
+    };
+
     return (
         <div className='w-full h-full flex items-center justify-center'>
             {loading ? (
-                <div className='flex flex-col p-20 mt-20'>       
-                <div className='flex justify-center'>           
-                    <ClockLoader 
-                    color="#F4CE14" 
-                    loading={loading} 
-                    size={100} 
-                    />
-                </div>
-                <h1 className='codefolio-yellow font-bold p-10'>Preparing your Portfolio...</h1>
+                <div className='flex flex-col p-20 mt-20'>
+                    <div className='flex justify-center'>
+                        <ClockLoader
+                            color="#F4CE14"
+                            loading={loading}
+                            size={100}
+                        />
+                    </div>
+                    <h1 className='codefolio-yellow font-bold p-10'>Preparing your Portfolio...</h1>
                 </div>
             ) : (
                 <div className='mt-20 lg:w-1/3 sm:w-1/2 h-auto flex flex-col p-10 justify-between codefoliobg-gray rounded-md'>
@@ -133,8 +138,15 @@ const UploadPortfolio = () => {
                             Create Portfolio
                         </button>
                     </form>
+                    <button
+                        onClick={handleSkip}
+                        className='mt-6 px-2 py-1 text-sm font-semibold codefolio-white rounded-md text-center w-auto'
+                    >
+                        Skip for now
+                    </button>
                 </div>
             )}
+
         </div>
     );
 }
