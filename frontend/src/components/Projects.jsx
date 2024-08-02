@@ -3,6 +3,8 @@ import EditProjectModal from "./dialogModals/EditProjectModal";
 import AddProjectModal from "./dialogModals/AddProjectModal";
 import { context } from "../pages/Profile/ProfilePage";
 import { fetchContext } from "./ProfileDataLoader";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrashAlt, faPen } from '@fortawesome/free-solid-svg-icons';
 
 const ProjectCard = ({ index, id, project_name, description, cv_project_languages = [], onEdit, onDelete }) => {
   const [edit, setEdit] = useContext(context);
@@ -11,16 +13,16 @@ const ProjectCard = ({ index, id, project_name, description, cv_project_language
     <div className="codefoliobg-gray p-4 rounded-lg shadow-md w-full sm:w-[30%] h-full mt-8 c">
       {edit && (
         <div className="flex flex-row justify-end">
-          <button onClick={() => onEdit(index)} className="text-white mr-2 hover:text-blue-300">✏️</button>
-          <button onClick={() => onDelete(id)} className="text-white hover:text-red-300">🗑️</button>
+          <button onClick={() => onEdit(index)} className="text-white mr-2 hover:text-blue-300"><FontAwesomeIcon className="codefolio-yellow" icon={faPen} /></button>
+          <button onClick={() => onDelete(id)} className="text-white hover:text-red-300"><FontAwesomeIcon className="codefolio-yellow" icon={faTrashAlt} /></button>
         </div>
       )}
       <div className='mt-5'>
         <div className="flex justify-center">
           <h3 className='font-bold text-[24px] text-white justify-center'>{project_name}</h3>
         </div>
-        <p className='mt-2 text-[14px] text-white'>{description}</p>
-        <p className='mt-2 text-[14px] text-white'>Languages: {languageNames}</p>
+        <p className='mt-2 text-[14px] text-white'>{description || " "}</p>
+        <p className='mt-2 text-[14px] text-white'>{"Languages:" + languageNames || " "}</p>
       </div>
     </div>
   );
@@ -49,7 +51,7 @@ const Projects = ({ data }) => {
     console.log(project_id);
     try {
       const accessToken = localStorage.getItem('accessToken');
-      const response = await fetch(`http://ec2-3-76-221-49.eu-central-1.compute.amazonaws.com:8000/api/profile/cv/project/delete`, {
+      const response = await fetch(`http://ec2-18-159-106-239.eu-central-1.compute.amazonaws.com:8000/api/profile/cv/project/delete`, {
         method: "DELETE",
         headers: { 
           "Content-Type": "application/json", 

@@ -2,6 +2,8 @@ import React, { useContext, useEffect, useState } from "react";
 import { context } from "../pages/Profile/ProfilePage";
 import AddExperienceModal from "./dialogModals/AddExperienceModal";
 import { fetchContext } from "./ProfileDataLoader";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrashAlt, faPen } from '@fortawesome/free-solid-svg-icons';
 
 const Experience = ({ data }) => {
   const [experienceList, setExperienceList] = useState(data || []);
@@ -23,7 +25,7 @@ const Experience = ({ data }) => {
     console.log(experienceId);
     try{
       const accessToken = localStorage.getItem('accessToken');
-      const response = await fetch('http://ec2-3-76-221-49.eu-central-1.compute.amazonaws.com:8000/api/profile/cv/experience',{
+      const response = await fetch('http://ec2-18-159-106-239.eu-central-1.compute.amazonaws.com:8000/api/profile/cv/experience',{
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
@@ -62,21 +64,21 @@ const Experience = ({ data }) => {
                 </h3>
                 {edit && (
                   <button onClick={() => deleteExperience(item.id)}className="text-white hover:text-red-300 px-5">
-                    🗑️
+                    <FontAwesomeIcon className="codefolio-yellow" icon={faTrashAlt} />
                   </button>
                 )}
               </div>
               <div className="ml-6">
                 <p className="text-base font-medium text-white flex justify-start">
-                  {item.company_name}
+                  {item.company_name || " "}
                 </p>
                 <p className="text-base text-white flex justify-start">
-                  {item.location}
+                  {item.location || " "}
                 </p>
                 <p className="text-base text-white flex justify-start">
-                  {item.start_date} - {item.end_date}
+                  {item.start_date || " "} - {item.end_date || " "}
                 </p>
-                <p className="text-white flex text-left">{item.description}</p>
+                <p className="text-white flex text-left">{item.description || " "}</p>
               </div>
             </li>
           ))}

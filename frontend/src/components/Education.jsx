@@ -2,6 +2,8 @@ import React, { useContext, useEffect, useState } from "react";
 import { context } from "../pages/Profile/ProfilePage";
 import { fetchContext } from "./ProfileDataLoader";
 import AddEducationModal from "./dialogModals/AddEducationModal";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrashAlt, faPen } from '@fortawesome/free-solid-svg-icons';
 
 const Education = ({ data }) => {
   const [educationList, setEducationLists] = useState(data || []);
@@ -21,7 +23,7 @@ const Education = ({ data }) => {
   const deleteEducation = async(educationId) => {
     try{
       const accessToken = localStorage.getItem('accessToken');
-      const response = await fetch('http://ec2-3-76-221-49.eu-central-1.compute.amazonaws.com:8000/api/profile/cv/education',{
+      const response = await fetch('http://ec2-18-159-106-239.eu-central-1.compute.amazonaws.com:8000/api/profile/cv/education',{
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
@@ -54,16 +56,16 @@ const Education = ({ data }) => {
         {educationList.map((item, index) => (
           <li key={index} className="mb-4">
             <div className="flex justify-between">
-            <h3 className="text-lg font-bold text-white text-left">{item.school}</h3>
+            <h3 className="text-lg font-bold text-white text-left">{item.school || " "}</h3>
             {edit && (
                   <button onClick={() => deleteEducation(item.id)}className="text-white hover:text-red-300 px-5">
-                    🗑️
+                    <FontAwesomeIcon className="codefolio-yellow" icon={faTrashAlt} />
                   </button>
                 )}
               </div>
             <div className="ml-6">
-              <p className="text-left font-medium text-white">{item.degree}</p>
-              <p className="text-left text-white">{item.start_date} - {item.end_date}</p>
+              <p className="text-left font-medium text-white">{item.degree || "Unknown degree"}</p>
+              <p className="text-left text-white">{item.start_date || " "} - {item.end_date || " "}</p>
             </div>
           </li>
         ))}

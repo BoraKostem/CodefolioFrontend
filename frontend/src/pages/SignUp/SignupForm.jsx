@@ -28,7 +28,7 @@ const SignupForm = () => {
 
     const handleSignup = async (values, { setSubmitting, resetForm }) => {
         try {
-            const response = await fetch('http://ec2-3-76-221-49.eu-central-1.compute.amazonaws.com:8000/api/register', {
+            const response = await fetch('http://ec2-18-159-106-239.eu-central-1.compute.amazonaws.com:8000/api/register', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -46,7 +46,7 @@ const SignupForm = () => {
 
             const data = await response.json();
             console.log('User created successfully:', data);
-            navigate('/login');
+            navigate('/dashboard');
             resetForm();
             
         } catch (error) {

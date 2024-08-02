@@ -1,6 +1,8 @@
 import React, { useContext, useState } from "react";
 import { context } from "../pages/Profile/ProfilePage";
 import EditSkillsModal from "./dialogModals/EditSkillsModal";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrashAlt, faPen } from '@fortawesome/free-solid-svg-icons';
 
 const Skills = ({ data }) => {
   const [skillsList, setSkillsList] = useState(data || []);
@@ -26,7 +28,7 @@ const Skills = ({ data }) => {
       <div className="cv-container">
         {edit && (
           <div className="flex flex-row justify-end">
-            <button onClick={handleEdit} className="text-white mr-2 hover:text-blue-300">✏️</button>
+            <button onClick={handleEdit} className="text-white mr-2 hover:text-blue-300"><FontAwesomeIcon className="codefolio-yellow" icon={faPen} /></button>
           </div>
         )}
         <div>

@@ -2,6 +2,8 @@ import React, { useContext, useState } from 'react'
 import { context } from '../pages/Profile/ProfilePage';
 import { useAsyncError } from 'react-router-dom';
 import EditLanguagesModal from './dialogModals/EditLanguagesModal';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrashAlt, faPen } from '@fortawesome/free-solid-svg-icons';
 
 const Languages = ({data}) => {
     const [languagesList, setLanguageList ] = useState( data || []);
@@ -25,13 +27,13 @@ const Languages = ({data}) => {
     <div className="cv-container">
     {edit && (
           <div className="flex flex-row justify-end">
-            <button onClick={handleEdit} className="text-white mr-2 hover:text-blue-300">✏️</button>
+            <button onClick={handleEdit} className="text-white mr-2 hover:text-blue-300"><FontAwesomeIcon className="codefolio-yellow" icon={faPen} /></button>
           </div>
         )}
     <div>
         {languagesList.map((item, index) => (
           <span key={index} className="text-white">
-            {item.language}
+            {item.language }
             {index < languagesList.length - 1 && (
               <span className="codefolio-yellow"> | </span>
             )}

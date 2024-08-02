@@ -2,6 +2,8 @@ import React, { useContext, useEffect, useState } from "react";
 import { context } from "../pages/Profile/ProfilePage";
 import AddCertificateModal from "./dialogModals/AddCertificateModal";
 import { fetchContext } from "./ProfileDataLoader";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrashAlt, faPen } from '@fortawesome/free-solid-svg-icons';
 
 const Certificate = ({ data }) => {
   const [certificateList, setCertificateList] = useState(data || []);
@@ -22,7 +24,7 @@ const Certificate = ({ data }) => {
     console.log(certificateId);
     try{
       const accessToken = localStorage.getItem('accessToken');
-      const response = await fetch('http://ec2-3-76-221-49.eu-central-1.compute.amazonaws.com:8000/api/profile/cv/certification',{
+      const response = await fetch('http://ec2-18-159-106-239.eu-central-1.compute.amazonaws.com:8000/api/profile/cv/certification',{
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
@@ -62,7 +64,7 @@ const Certificate = ({ data }) => {
                 </h3>
                 {edit && (
                   <button onClick={() => deleteCertificate(item.id)}className="text-white hover:text-red-300 px-5">
-                    🗑️
+                    <FontAwesomeIcon className="codefolio-yellow" icon={faTrashAlt} />
                   </button>
                 )}
               </div>

@@ -21,7 +21,7 @@ const ProfileDataLoader = () => {
       try {
         const accessToken = localStorage.getItem('accessToken');
         // Fetch profile data using the access token
-        const response = await fetch('http://ec2-3-76-221-49.eu-central-1.compute.amazonaws.com:8000/api/profile/cv', {
+        const response = await fetch('http://ec2-18-159-106-239.eu-central-1.compute.amazonaws.com:8000/api/whoami', {
           headers: {
             'Authorization': `Bearer ${accessToken}`
           }
@@ -30,7 +30,7 @@ const ProfileDataLoader = () => {
         
           const data = await response.json();
           console.log('Profile data:', data);
-          setProfileData(data.content);
+          setProfileData(data);
         
   
         setIsLoading(false);
@@ -42,19 +42,39 @@ const ProfileDataLoader = () => {
   
     fetchData();
   }, [fetchCntrl]);
+
+  const isProfileEmpty = (data) => {
+    if (!data) return true;
+    return (
+      !data.about &&
+      (!Array.isArray(data.cv_experiences) || data.cv_experiences.length === 0) &&
+      (!Array.isArray(data.cv_educations) || data.cv_educations.length === 0) &&
+      (!Array.isArray(data.cv_projects) || data.cv_projects.length === 0) &&
+      (!Array.isArray(data.cv_certifications) || data.cv_certifications.length === 0) &&
+      (!Array.isArray(data.cv_skills) || data.cv_skills.length === 0) &&
+      (!Array.isArray(data.cv_languages) || data.cv_languages.length === 0)
+    );
+  };
   
     return (
   
         
           <div>
-              { profileData && (
+              { !isProfileEmpty(profileData) ? (
                 <div>
                   <fetchContext.Provider value={[fetchCntrl, setFetchCntrl]}>
-                <UserInfo />
+                <UserInfo
+                name = {profileData.name}
+                email = {profileData.email}
+                phone = {profileData.phone} 
+                github = {profileData.github_url}
+                linkedin = {profileData.linkedin_url} 
+                location = {profileData.location}
+                />
                 <div className="min-h-screen w-full overflow-hidden mx-auto px-10">
-                <UserAbout data={profileData.about} />
+                <UserAbout data={profileData.name} />
                 <Experience data={profileData.cv_experiences} />
-                <Education data={profileData.cv_educations} />
+                <Education data={profileData.cv_education} />
                 <Projects data={profileData.cv_projects} />
                 <Certificate data={profileData.cv_certifications} />
                 <Skills data={profileData.cv_skills} />
@@ -62,7 +82,11 @@ const ProfileDataLoader = () => {
                 </div>
                 </fetchContext.Provider>
               </div>
-              ) 
+              ) : ( 
+                <div className='min-h-screen w-full overflow-hidden mx-auto px-50 flex justify-center items-center'>
+                  <h1 className="flex justify-center items-center codefolio-yellow font-bold text-xl">You haven't created your portfolio yet. Go to settings and upload your CV.</h1>
+                </div>
+              )
             }
          </div>
   

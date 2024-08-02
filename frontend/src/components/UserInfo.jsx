@@ -2,7 +2,7 @@ import React from 'react';
 import backgroundImage from "../assets/profileBackground.jpeg";
 import profilePic from "../assets/profilepic.png";
 
-const UserInfo = () => {
+const UserInfo = ({name, email, phone, github, linkedin, location}) => {
  
   return (
     <div className="h-full w-full relative flex flex-col items-center">
@@ -21,7 +21,7 @@ const UserInfo = () => {
         {/* First yellow half circle */}
         <div className="w-96 h-48 rounded-b-full codefolio-yellow-border codefoliobg-yellow flex justify-center">
         <div className="text-center mt-20">
-          <h1 className="text-2xl font-bold codefolio-gray">John Doe</h1>
+          <h1 className="text-2xl font-bold codefolio-gray">{name}</h1>
           
         </div>
         </div>
@@ -29,9 +29,11 @@ const UserInfo = () => {
         {/* Second yellow half circle */}
         <div className="w-96 h-48 rounded-t-full border-8 codefolio-yellow-border codefoliobg-yellow flex items-center flex-col mt-10">
           <div className="text-center codefolio-gray mt-20">
-            <h2 className="text-xl font-bold codefolio-gray">Data Scientist</h2>
-            <p className="text-gray-300 codefolio-gray">Email: example@example.com</p>
-            <p className="text-gray-300 codefolio-gray">Phone: +1234567890</p>
+            <h2 className="text-xl font-bold codefolio-gray">Get In Touch </h2>
+            <p className="text-gray-300 codefolio-gray">{email ? `Email: ${email}` : null}</p>
+            <p className="text-gray-300 codefolio-gray">{phone ? `Phone: ${phone}` : null}</p>
+            <p className="text-gray-300 codefolio-gray">{github ? `Github: ${github}` : null}</p>
+            <p className="text-gray-300 codefolio-gray">{linkedin ? `LinkedIn: ${linkedin}` : null}</p>
           </div>
         </div>
         
