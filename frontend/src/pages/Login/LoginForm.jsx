@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import background from "../../assets/background.png";
+import Footer from "../../components/Footer";
 
 const LoginForm = () => {
     const [email, setEmail] = useState('');
@@ -37,7 +38,7 @@ const LoginForm = () => {
 
     return (
         <div className='w-full h-full sm:flex items-start codefoliobg-gray'>
-            <div className='h-full flex'>
+            <div className='h-full sm:w-1/2 flex'>
                 <img src={background} className='sm:w-full h-full sm:h-1/4' alt='background'/>
             </div>
             <div className='w-full sm:w-1/2 h-full flex flex-col p-20 justify-between '>
@@ -74,9 +75,11 @@ const LoginForm = () => {
                                 Log in
                             </button>
                         </form>
-                        <button className='w-full my-2 font-semibold codefoliobg-white rounded-md py-4 text-center flex items-center justify-center'>
-                            Sign up
+                        <Link to="/signup">
+                            <button className='w-full my-2 font-semibold codefoliobg-white rounded-md py-4 text-center flex items-center justify-center'>
+                        Sign up
                         </button>
+                        </Link>
                         <div className='w-full flex flex-row items-center justify-center relative py-2'>
                             <div className='w-1/2 h-[1px] codefoliobg-white'></div>
                             <p className='text-lg absolute codefolio-white'> or </p>
@@ -91,6 +94,7 @@ const LoginForm = () => {
                             Back to Home
                 </button>
             </div>
+            <Footer/>
         </div>
     );
 }
