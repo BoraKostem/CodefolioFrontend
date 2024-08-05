@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import UploadPortfolio from "./UploadPortfolio";
+import UploadPortfolio from "../../components/UploadPortfolio";
 import UserNavbar from "../../components/Navbars/UserNavbar";
 import Navbar from "../../components/Navbars/Navbar";
 

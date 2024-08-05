@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import SearchBar from "./SearchBar";
+import SearchBar from "../../components/SearchBar";
 import Navbar from "../../components/Navbars/Navbar";
 import UserNavbar from "../../components/Navbars/UserNavbar";
 import Footer from "../../components/Footer";

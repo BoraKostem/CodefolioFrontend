@@ -10,6 +10,7 @@ import DashboardPage from './pages/Dashboard/DashboardPage';
 import ProfilePage from './pages/Profile/ProfilePage';
 import SettingsPage from './pages/Settings/SettingsPage';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import UserPage from './pages/UserProfile/UserPage';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path="/profile" element={<ProfilePage/>}/>
           <Route path="/settings" element={<SettingsPage/>}/>
           <Route path="/about" element={<AboutPage/>}/>
+          <Route path="/user/:id" element={<UserPage/>}/>
         </Routes>
       </Router>
     </div>

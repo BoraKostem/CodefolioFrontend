@@ -8,6 +8,7 @@ import Projects from './Projects';
 import Skills from './Skills';
 import Languages from './Languages';
 import Certificate from './Certificate';
+import Footer from './Footer';
 
 
 export const fetchContext = React.createContext();
@@ -55,11 +56,13 @@ const ProfileDataLoader = () => {
       (!Array.isArray(data.cv_languages) || data.cv_languages.length === 0)
     );
   };
+
+  if (!profileData) {
+    return <div className='cv-title'>Loading...</div>;
+}
   
     return (
-  
-        
-          <div>
+          <div className='pt-10'>
               { !isProfileEmpty(profileData) ? (
                 <div>
                   <fetchContext.Provider value={[fetchCntrl, setFetchCntrl]}>
@@ -71,14 +74,14 @@ const ProfileDataLoader = () => {
                 linkedin = {profileData.linkedin_url} 
                 location = {profileData.location}
                 />
-                <div className="min-h-screen w-full overflow-hidden mx-auto px-10">
-                <UserAbout data={profileData.name} />
-                <Experience data={profileData.cv_experiences} />
-                <Education data={profileData.cv_education} />
-                <Projects data={profileData.cv_projects} />
-                <Certificate data={profileData.cv_certifications} />
-                <Skills data={profileData.cv_skills} />
-                <Languages data={profileData.cv_languages} />
+                <div className="min-h-screen w-full overflow-hidden mx-auto px-10 pb-20">
+                <UserAbout data={profileData.about} />
+                {profileData.cv_experiences.length > 0 && (<Experience data={profileData.cv_experiences} />)}
+                {profileData.cv_education.length > 0 && (<Education data={profileData.cv_education} />)}
+                {profileData.cv_projects.length > 0 && (<Projects data={profileData.cv_projects} />)}
+                {profileData.cv_certifications.length > 0 && (<Certificate data={profileData.cv_certifications} />)}
+                {profileData.cv_skills.length > 0  && (<Skills data={profileData.cv_skills} />)}
+                {profileData.cv_languages > 0 && (<Languages data={profileData.cv_languages} />)}
                 </div>
                 </fetchContext.Provider>
               </div>
@@ -88,6 +91,7 @@ const ProfileDataLoader = () => {
                 </div>
               )
             }
+            <Footer/>
          </div>
   
          

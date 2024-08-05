@@ -10,7 +10,7 @@ const ProjectCard = ({ index, id, project_name, description, cv_project_language
   const [edit, setEdit] = useContext(context);
   const languageNames = cv_project_languages.map(lang => lang.language).join(", ");
   return (
-    <div className="codefoliobg-gray p-4 rounded-lg shadow-md w-full sm:w-[30%] h-full mt-8 c">
+    <div className="codefoliobg-gray p-4 rounded-lg shadow-md w-full sm:w-[30%] h-50 mt-8 c">
       {edit && (
         <div className="flex flex-row justify-end">
           <button onClick={() => onEdit(index)} className="text-white mr-2 hover:text-blue-300"><FontAwesomeIcon className="codefolio-yellow" icon={faPen} /></button>

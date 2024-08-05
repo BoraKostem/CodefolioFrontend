@@ -30,7 +30,7 @@ const UploadPortfolio = () => {
 
         try {
             setLoading(true);
-            const response = await fetch('http://ec2-3-76-221-49.eu-central-1.compute.amazonaws.com:8000/api/profile/cv/upload', {
+            const response = await fetch('http://ec2-18-159-106-239.eu-central-1.compute.amazonaws.com:8000/api/profile/cv/upload', {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${accessToken}`
