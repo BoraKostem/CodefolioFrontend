@@ -45,7 +45,7 @@ const Home = () => {
     const handleSearchClick = async() => {
 
         try{
-            const response = await fetch(`http://ec2-18-159-106-239.eu-central-1.compute.amazonaws.com:8000/api/search?q=${searchQuery}`,{
+            const response = await fetch(`https://qp6k69ftsi.execute-api.eu-central-1.amazonaws.com/prod/api/search?q=${searchQuery}`,{
                 method: 'GET'
             });
             if(response.ok){

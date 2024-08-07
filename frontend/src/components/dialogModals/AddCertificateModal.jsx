@@ -34,7 +34,7 @@ const AddCertificateModal = ({ isOpen, onRequestClose }) => {
 
     try{
         const accessToken = localStorage.getItem('accessToken');
-        const response = await fetch('http://ec2-18-159-106-239.eu-central-1.compute.amazonaws.com:8000/api/profile/cv/certification', {
+        const response = await fetch('https://qp6k69ftsi.execute-api.eu-central-1.amazonaws.com/prod/api/profile/cv/certification', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

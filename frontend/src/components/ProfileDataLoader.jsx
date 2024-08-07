@@ -22,7 +22,7 @@ const ProfileDataLoader = () => {
       try {
         const accessToken = localStorage.getItem('accessToken');
         // Fetch profile data using the access token
-        const response = await fetch('http://ec2-18-159-106-239.eu-central-1.compute.amazonaws.com:8000/api/whoami', {
+        const response = await fetch('https://qp6k69ftsi.execute-api.eu-central-1.amazonaws.com/prod/api/whoami', {
           headers: {
             'Authorization': `Bearer ${accessToken}`
           }

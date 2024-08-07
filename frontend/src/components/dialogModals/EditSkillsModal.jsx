@@ -32,7 +32,7 @@ const EditSkillsModal = ({ isOpen, onRequestClose, skills, onDelete, onAdd }) =>
         const accessToken = localStorage.getItem('accessToken');
         for(let skill of addArr){
           console.log(skill);
-          const response = await fetch('http://ec2-18-159-106-239.eu-central-1.compute.amazonaws.com:8000/api/profile/cv/skill',{
+          const response = await fetch('https://qp6k69ftsi.execute-api.eu-central-1.amazonaws.com/prod/api/profile/cv/skill',{
               method: "POST",
               headers: {
                   "Content-Type": "application/json",

@@ -28,7 +28,7 @@ const SignupForm = () => {
 
     const handleSignup = async (values, { setSubmitting, resetForm }) => {
         try {
-            const response = await fetch('http://ec2-18-159-106-239.eu-central-1.compute.amazonaws.com:8000/api/register', {
+            const response = await fetch('https://qp6k69ftsi.execute-api.eu-central-1.amazonaws.com/prod/api/register', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

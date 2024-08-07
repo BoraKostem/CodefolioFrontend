@@ -24,7 +24,7 @@ const UserProfile = () => {
     useEffect(() => {
         const fetchProfileData = async () => {
             try {
-                const response = await fetch(`http://ec2-18-159-106-239.eu-central-1.compute.amazonaws.com:8000/api/profile/public?id=${id}`);
+                const response = await fetch(`https://qp6k69ftsi.execute-api.eu-central-1.amazonaws.com/prod/api/profile/public?id=${id}`);
                 if (response.ok) {
                     const data = await response.json();
                     console.log(data);

@@ -29,7 +29,7 @@ const EditLanguagesModal = ({ isOpen, onRequestClose, languages, onDelete, onAdd
 
         for(let language of addArr){
           console.log(language);
-          const response = await fetch('http://ec2-3-76-221-49.eu-central-1.compute.amazonaws.com:8000/api/profile/cv/language',{
+          const response = await fetch('https://qp6k69ftsi.execute-api.eu-central-1.amazonaws.com/prod/api/profile/cv/language',{
               method: "POST",
               headers: {
                   "Content-Type": "application/json",

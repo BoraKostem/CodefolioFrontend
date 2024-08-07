@@ -23,7 +23,7 @@ const Education = ({ data }) => {
   const deleteEducation = async(educationId) => {
     try{
       const accessToken = localStorage.getItem('accessToken');
-      const response = await fetch('http://ec2-18-159-106-239.eu-central-1.compute.amazonaws.com:8000/api/profile/cv/education',{
+      const response = await fetch('https://qp6k69ftsi.execute-api.eu-central-1.amazonaws.com/prod/api/profile/cv/education',{
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
