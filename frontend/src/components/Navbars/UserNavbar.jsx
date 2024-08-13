@@ -34,8 +34,8 @@ const UserNavbar = () => {
 
   return (
     <nav className="bg-[#45474B] text-[#F5F7F8] fixed w-full z-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+      <div className="w-full mx-auto px-4 sm:px-6 lg:px-8 mt-4">
+        <div className="flex w-full justify-between h-12">
           <div className="flex flex-row w-full justify-between">
             <Link
               to="/"
