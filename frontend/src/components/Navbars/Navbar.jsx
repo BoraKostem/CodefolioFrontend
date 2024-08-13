@@ -6,7 +6,7 @@ const Navbar = () => {
     
 
     const buttonClasses =
-        "text-gray-100 font-bold text-sm px-2 py-1 hover:bg-gray-100 hover:text-gray-800 rounded-lg transition duration-300";
+        "text-gray-100 font-bold text-sm px-2 py-1 hover:bg-gray-100 hover:text-gray-800 rounded-lg transition duration-300 ";
 
     const buttons = (
         <>
@@ -27,7 +27,7 @@ const Navbar = () => {
     );
 
     return (
-        <nav className="bg-[#45474B] text-[#F5F7F8] fixed w-full">
+        <nav className="bg-[#45474B] text-[#F5F7F8] fixed w-full ">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex items-center justify-between h-16">
                     <div className="flex flex-row w-full justify-between">
