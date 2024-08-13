@@ -5,6 +5,7 @@ import { context } from "../pages/Profile/ProfilePage";
 import { fetchContext } from "./ProfileDataLoader";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt, faPen } from '@fortawesome/free-solid-svg-icons';
+import { API_BASE_URL } from "../utils/config";
 
 const ProjectCard = ({ index, id, project_name, description, cv_project_languages = [], onEdit, onDelete }) => {
   const [edit, setEdit] = useContext(context);
@@ -51,7 +52,7 @@ const Projects = ({ data }) => {
     console.log(project_id);
     try {
       const accessToken = localStorage.getItem('accessToken');
-      const response = await fetch(`https://qp6k69ftsi.execute-api.eu-central-1.amazonaws.com/prod/api/profile/cv/project/delete`, {
+      const response = await fetch(`${API_BASE_URL}/profile/cv/project/delete`, {
         method: "DELETE",
         headers: { 
           "Content-Type": "application/json", 

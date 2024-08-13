@@ -2,7 +2,7 @@ import React from "react";
 import backgroundImage from "../assets/profileBackground.jpeg";
 import profilePic from "../assets/profilepic.png";
 
-const UserInfo = ({ name, email, phone, github, linkedin, location }) => {
+const UserInfo = ({ name, email, phone, github, linkedin, location, profilePhoto }) => {
   return (
     <div className="h-full w-full relative flex flex-col items-center">
       {/* Background Image */}
@@ -17,9 +17,10 @@ const UserInfo = ({ name, email, phone, github, linkedin, location }) => {
       {/* Profile image */}
       <div className="absolute top-24 left-1/2 transform -translate-x-1/2">
         <img
-          src={profilePic}
+          src={profilePhoto}
           alt="Profile"
           className="w-36 h-36 rounded-full codefolio-yellow-border relative z-10"
+          onError={(e) => { e.target.onerror = null; e.target.src = profilePhoto; }}
         />
       </div>
 

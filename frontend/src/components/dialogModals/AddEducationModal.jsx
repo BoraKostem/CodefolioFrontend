@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import GenericModal from "./GenericModal";
 import { fetchContext } from "../ProfileDataLoader";
+import { API_BASE_URL } from "../../utils/config";
 
 const AddEducationModal = ({ isOpen, onRequestClose }) => {
   const [fetchCntrl, setFetchCntrl] = useContext(fetchContext);
@@ -46,7 +47,7 @@ const AddEducationModal = ({ isOpen, onRequestClose }) => {
 
     try{
         const accessToken = localStorage.getItem('accessToken');
-        const response = await fetch('https://qp6k69ftsi.execute-api.eu-central-1.amazonaws.com/prod/api/profile/cv/education', {
+        const response = await fetch(`${API_BASE_URL}/profile/cv/education`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

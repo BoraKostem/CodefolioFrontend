@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { EditPopup, ChangePasswordPopup, EditNamePopup, EditPhotoPopup, EditCvPopup } from '../../components/Settings';
+import EditGithubPopup from '../../components/Settings/EditGithubPopup';
+import { API_BASE_URL } from '../../utils/config';
 
 const Settings = () => {
     const [userData, setUserData] = useState({});
@@ -8,27 +10,44 @@ const Settings = () => {
     const [isChangePasswordPopupOpen, setIsChangePasswordPopupOpen] = useState(false);
     const [isEditCVPopupOpen, setIsEditCVPopupOpen] = useState(false);
     const [isEditPopupOpen, setIsEditPopupOpen] = useState(false);
+    const [isEditGithubPopupOpen, setIsEditGithubPopupOpen] = useState(false);
     const [editField, setEditField] = useState('');
+
+    
 
     useEffect(() => {
         // Fetch user data when component mounts
         fetchUserData();
-    }, []);
+    },[]);
 
-    const fetchUserData = () => {
-        setTimeout(() => {
-            setUserData({
-                email: 'example@example.com', // Static email
-                password: '********', // Hidden password
-                profilePhoto: 'https://picsum.photos/200', // Static profile photo
-                fullName: 'Mehmet Akif Yavuz',
-                country: 'Turkey',
-                region: 'Istanbul',
-                cv: { name: 'CV.pdf' },
-                github: 'https://github.com/example',
-                medium: 'https://medium.com/@example'
-            });
-        }, 1000);
+    const fetchUserData = async() => {
+        const accessToken = localStorage.getItem('accessToken');
+        try{
+        const response = await fetch(`${API_BASE_URL}/whoami`,{
+            method: 'GET',
+            headers:{
+                'Authorization': `Bearer ${accessToken}`
+            }
+        });
+
+        const data = await response.json();
+        console.log(data);
+        setUserData({
+            email: data.email,
+            profilePhoto: data.profile_photo, // Static profile photo
+            fullName: data.name,
+            country: 'Turkey',
+            region: 'Istanbul',
+            cv: { name: 'CC.pdf' },
+            github: data.github_url
+        });
+        console.log(userData)
+        console.log(userData.profilePhoto);
+        }catch(error){
+            console.log(error);
+        }
+
+            
     };
 
     const openEditPopup = (field) => {
@@ -50,6 +69,10 @@ const Settings = () => {
 
     const openEditCVPopup = () => {
         setIsEditCVPopupOpen(true);
+    };
+
+    const openEditGithubPopup = () => {
+        setIsEditGithubPopupOpen(true);
     };
 
     return (
@@ -80,9 +103,131 @@ const Settings = () => {
                                 </div>
                             </div>
                         </div>
+                        {/* CV Section */}
+                        <div className="border p-3 mx-2 flex flex-col items-center gap-y-3 sm:col-span-3">
+                            <label htmlFor="cv" className="block text-sm font-medium leading-6 text-gray-900">
+                                CV
+                            </label>
+                            <div className="mt-2 flex items-center justify-center">
+                                <input
+                                    id="full-name"
+                                    name="full-name"
+                                    className='codefolio-black bg-gray-100 px-2 py-1.5 rounded-md text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300'
+                                    value={userData.cv ? userData.cv.name : 'No CV Uploaded'}
+                                    disabled
+                                />
+                                <button
+                                    onClick={() => openEditCVPopup()}
+                                    type="button"
+                                    className="rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 ml-2"
+                                >
+                                    Edit
+                                </button>
+                            </div>
+                        </div>
+                        <div className="flex flex-col items-center gap-y-3 sm:col-span-3 border p-3 mx-2">
+                            <label htmlFor="full-name" className="block text-sm font-medium leading-6 text-gray-900">
+                                GitHub Profile
+                            </label>
+                            <div className="mt-2 flex items-center justify-center">
+                                <input
+                                    id="full-name"
+                                    name="full-name"
+                                    className='codefolio-black bg-gray-100 px-2 py-1.5 rounded-md text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300'
+                                    value={userData.github}
+                                    disabled
+                                />
+                                <a
+                                    href={userData.github}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 ml-2"
+                                >
+                                    Visit
+                                </a>
+                                <button
+                                    onClick={() => openEditGithubPopup()}
+                                    type="button"
+                                    className="rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 ml-2"
+                                >
+                                    Edit
+                                </button>
+                            </div>
+                        </div>
+                        
+                        
+                    </div>
+                </div>
+            </div>
+            {isEditPopupOpen && <EditPopup field={editField} userData={userData} onClose={() => setIsEditPopupOpen(false)} />}
+            {isChangePasswordPopupOpen && <ChangePasswordPopup onClose={() => setIsChangePasswordPopupOpen(false)} />}
+            {isEditNamePopupOpen && <EditNamePopup userName={userData.fullName} onClose={() => setIsEditNamePopupOpen(false)} />}
+            {isEditPhotoPopupOpen && <EditPhotoPopup userPhoto={userData.profilePhoto} onClose={() => setIsEditPhotoPopupOpen(false)} />}
+            {isEditCVPopupOpen && <EditCvPopup onClose={() => setIsEditCVPopupOpen(false)} />}
+            {isEditGithubPopupOpen && <EditGithubPopup field={editField} userData={userData.github} onClose={() => setIsEditGithubPopupOpen(false)}/>}
+        </div>
+    );
+
+}
+
+export default Settings;
 
 
-                        {/* Email and Password Section */}
+/*
+<div className="flex flex-col items-center gap-y-3 sm:col-span-3 border p-3 mx-2">
+                            <label htmlFor="full-name" className="block text-sm font-medium leading-6 text-gray-900">
+                                Medium Profile
+                            </label>
+                            <div className="mt-2 flex items-center justify-center">
+                                <input
+                                    id="full-name"
+                                    name="full-name"
+                                    className='codefolio-black bg-gray-100 px-2 py-1.5 rounded-md text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300'
+                                    value={userData.medium}
+                                    disabled
+                                />
+                                <a
+                                    href={userData.medium}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 ml-2"
+                                >
+                                    Visit
+                                </a>
+                                 <button
+                                    onClick={() => openEditPopup('medium')}
+                                    type="button"
+                                    className="rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 ml-2"
+                                >
+                                    Edit
+                                </button> 
+                            </div>
+    
+                        </div>
+
+                        <div className="border p-3 mx-2 flex flex-col items-center gap-y-3 sm:col-span-3">
+                            <label htmlFor="full-name" className="block text-sm font-medium leading-6 text-gray-900">
+                                Name
+                            </label>
+                            <div className="mt-2 flex items-center justify-center">
+                                <input
+                                    id="full-name"
+                                    name="full-name"
+                                    className='codefolio-black bg-gray-100 px-2 py-1.5 rounded-md text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300'
+                                    value={userData.fullName}
+                                    disabled
+                                />
+                                <button
+                                    onClick={() => openEditNamePopup()}
+                                    type="button"
+                                    className="rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 ml-2"
+                                >
+                                    Edit
+                                </button>
+                            </div>
+                        </div>
+
+                      s
                         <div className="flex border p-3 mx-2 flex-col items-center gap-y-3 sm:col-span-3">
                             <div className="flex flex-col sm:flex-row items-center py-5 gap-y-3 sm:col-span-3">
                                 <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900 sm:mr-2">
@@ -105,128 +250,5 @@ const Settings = () => {
                                 Change Password
                             </button>
                         </div>
-                        {/* Name Section */}
-                        <div className="border p-3 mx-2 flex flex-col items-center gap-y-3 sm:col-span-3">
-                            <label htmlFor="full-name" className="block text-sm font-medium leading-6 text-gray-900">
-                                Name
-                            </label>
-                            <div className="mt-2 flex items-center justify-center">
-                                <input
-                                    id="full-name"
-                                    name="full-name"
-                                    className='codefolio-black bg-gray-100 px-2 py-1.5 rounded-md text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300'
-                                    value={userData.fullName}
-                                    disabled
-                                />
-                                <button
-                                    onClick={() => openEditNamePopup()}
-                                    type="button"
-                                    className="rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 ml-2"
-                                >
-                                    Edit
-                                </button>
-                            </div>
-                        </div>
-                        {/* CV Section */}
-                        <div className="border p-3 mx-2 flex flex-col items-center gap-y-3 sm:col-span-3">
-                            <label htmlFor="cv" className="block text-sm font-medium leading-6 text-gray-900">
-                                CV
-                            </label>
-                            <div className="mt-2 flex items-center justify-center">
-                                <input
-                                    id="full-name"
-                                    name="full-name"
-                                    className='codefolio-black bg-gray-100 px-2 py-1.5 rounded-md text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300'
-                                    value={userData.cv ? userData.cv.name : 'No CV Uploaded'}
-                                    disabled
-                                />
-                                {userData.cv && (
-                                    <a
-                                        href={userData.cv.name}
-                                        download={userData.cv.name}
-                                        className="rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 ml-2"
-                                    >
-                                        Download
-                                    </a>
-                                )}
-                                <button
-                                    onClick={() => openEditCVPopup()}
-                                    type="button"
-                                    className="rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 ml-2"
-                                >
-                                    Edit
-                                </button>
-                            </div>
-                        </div>
-                        <div className="flex flex-col items-center gap-y-3 sm:col-span-3 border p-3 mx-2">
-                            <label htmlFor="full-name" className="block text-sm font-medium leading-6 text-gray-900">
-                                GtiHub Profile
-                            </label>
-                            <div className="mt-2 flex items-center justify-center">
-                                <input
-                                    id="full-name"
-                                    name="full-name"
-                                    className='codefolio-black bg-gray-100 px-2 py-1.5 rounded-md text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300'
-                                    value={userData.github}
-                                    disabled
-                                />
-                                <a
-                                    href={userData.github}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 ml-2"
-                                >
-                                    Visit
-                                </a>
-                                <button
-                                    onClick={() => openEditPopup('github')}
-                                    type="button"
-                                    className="rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 ml-2"
-                                >
-                                    Edit
-                                </button>
-                            </div>
-                        </div>
-                        <div className="flex flex-col items-center gap-y-3 sm:col-span-3 border p-3 mx-2">
-                            <label htmlFor="full-name" className="block text-sm font-medium leading-6 text-gray-900">
-                                Medium Profile
-                            </label>
-                            <div className="mt-2 flex items-center justify-center">
-                                <input
-                                    id="full-name"
-                                    name="full-name"
-                                    className='codefolio-black bg-gray-100 px-2 py-1.5 rounded-md text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300'
-                                    value={userData.medium}
-                                    disabled
-                                />
-                                <a
-                                    href={userData.medium}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 ml-2"
-                                >
-                                    Visit
-                                </a>
-                                <button
-                                    onClick={() => openEditPopup('medium')}
-                                    type="button"
-                                    className="rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 ml-2"
-                                >
-                                    Edit
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            {isEditPopupOpen && <EditPopup field={editField} userData={userData} onClose={() => setIsEditPopupOpen(false)} />}
-            {isChangePasswordPopupOpen && <ChangePasswordPopup onClose={() => setIsChangePasswordPopupOpen(false)} />}
-            {isEditNamePopupOpen && <EditNamePopup userName={userData.fullName} onClose={() => setIsEditNamePopupOpen(false)} />}
-            {isEditPhotoPopupOpen && <EditPhotoPopup userPhoto={userData.profilePhoto} onClose={() => setIsEditPhotoPopupOpen(false)} />}
-            {isEditCVPopupOpen && <EditCvPopup userCv={userData.cv} onClose={() => setIsEditCVPopupOpen(false)} />}
-        </div>
-    );
 
-}
-
-export default Settings;
+                        */

@@ -55,6 +55,7 @@ const LoginForm = () => {
     };
 
     return (
+        <div>
         <div className='w-full h-full sm:flex items-start codefoliobg-gray'>
             <div className='h-full sm:w-1/2 flex'>
                 <img src={background} className='sm:w-full h-full sm:h-1/4' alt='background' />
@@ -126,7 +127,9 @@ const LoginForm = () => {
                     </div>
                 </div>
             )}
-            <Footer />
+            
+        </div>
+        <Footer />
         </div>
     );
 }

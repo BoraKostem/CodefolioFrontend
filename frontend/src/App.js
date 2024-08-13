@@ -11,6 +11,7 @@ import ProfilePage from './pages/Profile/ProfilePage';
 import SettingsPage from './pages/Settings/SettingsPage';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import UserPage from './pages/UserProfile/UserPage';
+import ContactForm from './pages/Contact/Contact';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route path="/settings" element={<SettingsPage/>}/>
           <Route path="/about" element={<AboutPage/>}/>
           <Route path="/user/:id" element={<UserPage/>}/>
+          <Route path="/contact" element={<ContactForm/>}/>
         </Routes>
       </Router>
     </div>

@@ -4,6 +4,7 @@ import EditSkillsModal from "./dialogModals/EditSkillsModal";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt, faPen } from '@fortawesome/free-solid-svg-icons';
 
+
 const Skills = ({ data }) => {
   const [skillsList, setSkillsList] = useState(data || []);
   const [edit, setEdit] = useContext(context);

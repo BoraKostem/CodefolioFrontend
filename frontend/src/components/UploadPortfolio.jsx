@@ -1,6 +1,8 @@
+import { getIn } from 'formik';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ClockLoader from "react-spinners/ClockLoader";
+import { API_BASE_URL } from '../utils/config';
 
 const UploadPortfolio = () => {
     const [country, setCountry] = useState('');
@@ -30,7 +32,7 @@ const UploadPortfolio = () => {
 
         try {
             setLoading(true);
-            const response = await fetch('https://qp6k69ftsi.execute-api.eu-central-1.amazonaws.com/prod/api/profile/cv/upload', {
+            const response = await fetch(`${API_BASE_URL}/profile/cv/upload`, {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${accessToken}`
@@ -49,8 +51,23 @@ const UploadPortfolio = () => {
 
             const data = await response.json();
             console.log(data);
-            setLoading(false);
 
+             // Upload GitHub URL
+             if(github){
+             const githubResponse = await fetch('https://qp6k69ftsi.execute-api.eu-central-1.amazonaws.com/prod/api/profile/github', {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${accessToken}`,
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ github_url: github })
+            });
+            console.log(githubResponse);
+            if (!githubResponse.ok) {
+                throw new Error('Failed to upload GitHub URL');
+            }
+            }
+            setLoading(false);
             navigate('/profile');
         } catch (error) {
             console.error('Error:', error);
@@ -79,28 +96,6 @@ const UploadPortfolio = () => {
                 <div className='mt-20 lg:w-1/3 sm:w-1/2 h-auto flex flex-col p-10 justify-between codefoliobg-gray rounded-md'>
                     <h1 className='text-4xl text-center font-bold codefolio-yellow tracking-widest mb-6'>Upload Portfolio</h1>
                     <form onSubmit={handleSubmit} className='flex flex-col'>
-                        <label className='text-lg codefolio-white mb-2'>Location</label>
-                        <div className='flex justify-between'>
-                            <select
-                                value={country}
-                                onChange={(e) => setCountry(e.target.value)}
-                                className='w-5/12 py-2 mb-4 bg-transparent border-b outline-none focus:outline-none codefolio-white'
-                            >
-                                <option value="" disabled>Select your country</option>
-                                <option value="tr">Türkiye</option>
-                                <option value="us">United States</option>
-                            </select>
-                            <select
-                                value={region}
-                                onChange={(e) => setRegion(e.target.value)}
-                                className='w-5/12 py-2 mb-4 bg-transparent border-b outline-none focus:outline-none codefolio-white'
-                            >
-                                <option value="" disabled>Select your region</option>
-                                <option value="region1">Region 1</option>
-                                <option value="region2">Region 2</option>
-                                {/* Add more options as needed */}
-                            </select>
-                        </div>
                         <div className='relative'>
                             <input
                                 type="file"
@@ -122,13 +117,6 @@ const UploadPortfolio = () => {
                             type="url"
                             value={github}
                             onChange={(e) => setGithub(e.target.value)}
-                            className='w-full py-2 mb-4 bg-transparent border-b outline-none focus:outline-none codefolio-white'
-                        />
-                        <input
-                            placeholder='Medium Profile Link'
-                            type="url"
-                            value={medium}
-                            onChange={(e) => setMedium(e.target.value)}
                             className='w-full py-2 mb-4 bg-transparent border-b outline-none focus:outline-none codefolio-white'
                         />
                         <button

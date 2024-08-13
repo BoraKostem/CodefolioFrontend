@@ -4,6 +4,7 @@ import { fetchContext } from "./ProfileDataLoader";
 import AddEducationModal from "./dialogModals/AddEducationModal";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt, faPen } from '@fortawesome/free-solid-svg-icons';
+import { API_BASE_URL } from "../utils/config";
 
 const Education = ({ data }) => {
   const [educationList, setEducationLists] = useState(data || []);
@@ -23,7 +24,7 @@ const Education = ({ data }) => {
   const deleteEducation = async(educationId) => {
     try{
       const accessToken = localStorage.getItem('accessToken');
-      const response = await fetch('https://qp6k69ftsi.execute-api.eu-central-1.amazonaws.com/prod/api/profile/cv/education',{
+      const response = await fetch(`${API_BASE_URL}/profile/cv/education`,{
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",

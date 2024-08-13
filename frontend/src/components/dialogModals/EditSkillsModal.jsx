@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Modal from "react-modal";
 import GenericModal from "./GenericModal";
+import { API_BASE_URL } from "../../utils/config";
 
 
 Modal.setAppElement('#root');
@@ -32,7 +33,7 @@ const EditSkillsModal = ({ isOpen, onRequestClose, skills, onDelete, onAdd }) =>
         const accessToken = localStorage.getItem('accessToken');
         for(let skill of addArr){
           console.log(skill);
-          const response = await fetch('https://qp6k69ftsi.execute-api.eu-central-1.amazonaws.com/prod/api/profile/cv/skill',{
+          const response = await fetch(`${API_BASE_URL}/profile/cv/skill`,{
               method: "POST",
               headers: {
                   "Content-Type": "application/json",
@@ -50,7 +51,7 @@ const EditSkillsModal = ({ isOpen, onRequestClose, skills, onDelete, onAdd }) =>
       }
 
         for(let skill of deletionArr ){
-            const response = await fetch('http://ec2-3-76-221-49.eu-central-1.compute.amazonaws.com:8000/api/profile/cv/skill', {
+            const response = await fetch(`${API_BASE_URL}/profile/cv/skill`, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json",

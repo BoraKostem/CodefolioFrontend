@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import Modal from "react-modal";
 import GenericModal from "./GenericModal";
 import { fetchContext } from "../ProfileDataLoader";
+import { API_BASE_URL } from "../../utils/config";
 
 Modal.setAppElement('#root'); // This is to avoid accessibility issues
 
@@ -47,7 +48,7 @@ const EditProjectModal = ({ isOpen, onRequestClose, project }) => {
 
     try {
       const accessToken = localStorage.getItem('accessToken');
-      const response = await fetch(`https://qp6k69ftsi.execute-api.eu-central-1.amazonaws.com/prod/api/profile/cv/project/edit`, {
+      const response = await fetch(`${API_BASE_URL}/profile/cv/project/edit`, {
         method: "PATCH",
         headers: { 
           "Content-Type": "application/json",

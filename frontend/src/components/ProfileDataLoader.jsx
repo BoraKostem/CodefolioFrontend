@@ -9,6 +9,7 @@ import Skills from './Skills';
 import Languages from './Languages';
 import Certificate from './Certificate';
 import Footer from './Footer';
+import { API_BASE_URL } from '../utils/config';
 
 
 export const fetchContext = React.createContext();
@@ -17,18 +18,18 @@ const ProfileDataLoader = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [profileData, setProfileData] = useState(null);
     const [fetchCntrl, setFetchCntrl] = useState(false);
-  useEffect(() => {
+  
+    useEffect(() => {
     const fetchData = async () => {
       try {
         const accessToken = localStorage.getItem('accessToken');
         // Fetch profile data using the access token
-        const response = await fetch('https://qp6k69ftsi.execute-api.eu-central-1.amazonaws.com/prod/api/whoami', {
-          headers: {
+        const response = await fetch(`${API_BASE_URL}/whoami`, {
+        method: 'GET',  
+        headers: {
             'Authorization': `Bearer ${accessToken}`
           }
-        });
-  
-        
+        });    
           const data = await response.json();
           console.log('Profile data:', data);
           setProfileData(data);
@@ -73,8 +74,9 @@ const ProfileDataLoader = () => {
                 github = {profileData.github_url}
                 linkedin = {profileData.linkedin_url} 
                 location = {profileData.location}
+                profilePhoto = {profileData.profile_photo}
                 />
-                <div className="min-h-screen w-full overflow-hidden mx-auto px-10 pb-20">
+                <div className="min-h-screen w-fullxs mx-auto px-10 pb-20">
                 <UserAbout data={profileData.about} />
                 {profileData.cv_experiences.length > 0 && (<Experience data={profileData.cv_experiences} />)}
                 {profileData.cv_education.length > 0 && (<Education data={profileData.cv_education} />)}
@@ -84,6 +86,9 @@ const ProfileDataLoader = () => {
                 {profileData.cv_languages > 0 && (<Languages data={profileData.cv_languages} />)}
                 </div>
                 </fetchContext.Provider>
+                <div>
+                <Footer/>
+                </div>
               </div>
               ) : ( 
                 <div className='min-h-screen w-full overflow-hidden mx-auto px-50 flex justify-center items-center'>
@@ -91,7 +96,7 @@ const ProfileDataLoader = () => {
                 </div>
               )
             }
-            <Footer/>
+           
          </div>
   
          

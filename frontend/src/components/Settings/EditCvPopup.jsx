@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
+import ClipLoader from "react-spinners/ClipLoader";
 
-const EditCvPopup = ({ userCv, onClose }) => {
-    const [cv, setCv] = useState(userCv);
-
-    /*
+const EditCvPopup = ({  onClose }) => {
+    const [cv, setCv] = useState(null);
+    let [loading, setLoading] = useState(false);
+     // Function to handle form submission
      const handleSave = async (e) => {
         e.preventDefault();
 
@@ -18,8 +19,8 @@ const EditCvPopup = ({ userCv, onClose }) => {
         const accessToken = localStorage.getItem('accessToken');
 
         try {
-            setLoading(true);
-            const response = await fetch('http://ec2-3-76-221-49.eu-central-1.compute.amazonaws.com:8000/api/profile/cv/upload', {
+          setLoading(true);
+            const response = await fetch('https://qp6k69ftsi.execute-api.eu-central-1.amazonaws.com/prod/api/profile/cv/upload', {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${accessToken}`
@@ -38,51 +39,46 @@ const EditCvPopup = ({ userCv, onClose }) => {
 
             const data = await response.json();
             console.log(data);
+            onClose();
             setLoading(false);
 
-            navigate('/profile');
         } catch (error) {
             console.error('Error:', error);
         }
-    };
-    */
-    const handleSave = () => {
-        // Update user CV logic here
-        // Example: axios.post('/api/user/update', { cv })
-        console.log('Updated CV:', cv);
-        onClose();
-    }
 
-    const handleCvChange = (e) => {
-        const file = e.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onloadend = () => {
-                setCv(reader.result);
-            };
-            reader.readAsDataURL(file);
-        }
-    }
+    };
+
+
 
     return (
         <div className='fixed inset-0 flex items-center justify-center bg-black bg-opacity-50'>
+                   {loading ? (
+        <div className="flex justify-center items-center">
+        <ClipLoader
+          color={"#F4CE14"}
+          loading={loading}
+          size={120}
+          aria-label="Loading Spinner"
+          data-testid="loader"
+          
+        />
+        </div>
+      ) :(
             <div className='codefoliobg-gray p-6 rounded-md'>
+     
                 <h2 className='text-2xl codefolio-yellow mb-4'>Edit CV</h2>
                 <div className='flex flex-col items-center'>
-                    {/*{cv ? (
-                        <embed src={cv} type="application/pdf" className='w-full h-64 mb-4'/>
-                    ) : (
-                        <span className='codefolio-white mb-4'>No CV uploaded</span>
-                    )}*/}
                     <input
                         type="file"
                         accept="application/pdf"
-                        onChange={handleCvChange}
+                        onChange={(e) => setCv(e.target.files[0])}
                         className='w-full py-2 mb-4 bg-transparent border-b outline-none focus:outline-none codefolio-white'/>
                 </div>
                 <button onClick={handleSave} className='w-full py-2 codefoliobg-yellow rounded-md text-center text-black mb-2'>Save</button>
                 <button onClick={onClose} className='w-full py-2 codefolio-white-border rounded-md text-center'>Cancel</button>
-            </div>
+          
+            </div> 
+      )}      
         </div>
     );
 }

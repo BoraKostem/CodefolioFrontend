@@ -4,7 +4,7 @@ import AddExperienceModal from "./dialogModals/AddExperienceModal";
 import { fetchContext } from "./ProfileDataLoader";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt, faPen } from '@fortawesome/free-solid-svg-icons';
-
+import { API_BASE_URL } from "../utils/config";
 const Experience = ({ data }) => {
   const [experienceList, setExperienceList] = useState(data || []);
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
@@ -25,7 +25,7 @@ const Experience = ({ data }) => {
     console.log(experienceId);
     try{
       const accessToken = localStorage.getItem('accessToken');
-      const response = await fetch('https://qp6k69ftsi.execute-api.eu-central-1.amazonaws.com/prod/api/profile/cv/experience',{
+      const response = await fetch(`${API_BASE_URL}/profile/cv/experience`,{
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",

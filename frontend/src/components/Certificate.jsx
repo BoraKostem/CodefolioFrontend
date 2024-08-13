@@ -4,6 +4,7 @@ import AddCertificateModal from "./dialogModals/AddCertificateModal";
 import { fetchContext } from "./ProfileDataLoader";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt, faPen } from '@fortawesome/free-solid-svg-icons';
+import { API_BASE_URL } from "../utils/config";
 
 const Certificate = ({ data }) => {
   const [certificateList, setCertificateList] = useState(data || []);
@@ -24,7 +25,7 @@ const Certificate = ({ data }) => {
     console.log(certificateId);
     try{
       const accessToken = localStorage.getItem('accessToken');
-      const response = await fetch('https://qp6k69ftsi.execute-api.eu-central-1.amazonaws.com/prod/api/profile/cv/certification',{
+      const response = await fetch(`${API_BASE_URL}/profile/cv/certification`,{
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",

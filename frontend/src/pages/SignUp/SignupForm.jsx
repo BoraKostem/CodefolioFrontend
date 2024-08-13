@@ -4,6 +4,7 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import * as Yup from 'yup';
+import { API_BASE_URL } from '../../utils/config';
 
 const SignupForm = () => {
     const [showPassword, setShowPassword] = useState(false);
@@ -28,7 +29,7 @@ const SignupForm = () => {
 
     const handleSignup = async (values, { setSubmitting, resetForm }) => {
         try {
-            const response = await fetch('https://qp6k69ftsi.execute-api.eu-central-1.amazonaws.com/prod/api/register', {
+            const response = await fetch(`${API_BASE_URL}/register`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
