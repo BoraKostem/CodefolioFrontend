@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { EditPopup, ChangePasswordPopup, EditNamePopup, EditPhotoPopup, EditCvPopup } from '../../components/Settings';
 import EditGithubPopup from '../../components/Settings/EditGithubPopup';
 import EditBgPhotoPopup from '../../components/Settings/EditBgPhotoPopup';
+import { Link } from "react-router-dom";
 
 import { API_BASE_URL } from '../../utils/config';
 
@@ -56,6 +57,7 @@ const Settings = () => {
     return (
         <div className='w-screen h-screen codefoliobg-white'>
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            
                 <div className="border-b mt-10 border-gray-900/10 pb-12">
                     <h1 className='border-b border-gray-900/10 pb-2 text-4xl text-center font-bold codefolio-yellow tracking-widest mb-6'>Settings</h1>
                     <div className="grid grid-cols-1 gap-y-8 sm:grid-cols-6">
@@ -159,6 +161,12 @@ const Settings = () => {
                             </div>
                         </div>
                     </div>
+                    
+                </div>
+                <div className="mt-6">
+                    <Link to="/profile" className="codefolio-yellow hover:text-blue-700 text-lg font-semibold">
+                    <button className='codefoliobg-yellow text-white p-4 rounded-xl font-bold'> Go back to Profile </button>
+                        </Link>
                 </div>
             </div>
             {isEditPopupOpen && <EditPopup field={editField} userData={userData} onClose={() => setIsEditPopupOpen(false)} />}
