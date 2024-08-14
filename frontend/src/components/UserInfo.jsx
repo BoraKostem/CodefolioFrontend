@@ -17,7 +17,7 @@ const UserInfo = ({ name, email, phone, github, linkedin, location, profilePhoto
       {/* Profile image */}
       <div className="absolute top-24 left-1/2 transform -translate-x-1/2">
         <img
-          src={profilePhoto}
+          src={profilePic}
           alt="Profile"
           className="w-36 h-36 rounded-full codefolio-yellow-border relative z-10"
           onError={(e) => { e.target.onerror = null; e.target.src = profilePhoto; }}

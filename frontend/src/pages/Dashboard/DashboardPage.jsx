@@ -3,11 +3,13 @@ import { useEffect, useState } from "react";
 import UploadPortfolio from "../../components/UploadPortfolio";
 import UserNavbar from "../../components/Navbars/UserNavbar";
 import Navbar from "../../components/Navbars/Navbar";
+import { useNavigate } from 'react-router-dom';
 
 function DashboardPage() {
   const [isAuthenticated, setIsAuthenticated] = useState(
     localStorage.getItem("accessToken") ? true : false
   );
+  const navigate = useNavigate();
 
   const SessionTimeout = 5 * 60 * 1000; // 5 minutes in milliseconds
 
@@ -18,6 +20,7 @@ function DashboardPage() {
     sessionTimeoutId = setTimeout(() => {
       localStorage.removeItem("access_token");
       setIsAuthenticated(false);
+      navigate("/login");
     }, SessionTimeout);
   };
 

@@ -15,7 +15,6 @@ const ProjectCard = ({
   project_name,
   description,
   github_project_languages = [],
-  onEdit,
   onDelete,
   url,
 }) => {
@@ -29,12 +28,6 @@ const ProjectCard = ({
           {edit && (
             <div className="flex flex-row justify-end">
               <button
-                onClick={() => onEdit(index)}
-                className="text-white mr-2 hover:text-blue-300"
-              >
-                <FontAwesomeIcon className="codefolio-yellow" icon={faPen} />
-              </button>
-              <button
                 onClick={() => onDelete(id)}
                 className="text-white hover:text-red-300"
               >
@@ -43,8 +36,8 @@ const ProjectCard = ({
             </div>
           )}
           <div className="flex flex-col items-center mt-5">
-            <div className="flex items-center">
-              <h3 className="font-bold text-[20px] codefolio-white mr-2">
+            <div className="flex items-center mx-4">
+              <h3 className="font-bold text-xs codefolio-white mr-2">
                 {project_name}
               </h3>
               <a href={`${url}/${project_name}`} target="_blank" rel="noopener noreferrer">
@@ -89,17 +82,13 @@ const GithubProjects = ({ githubUrl }) => {
     fetchGithubData();
   }, [fetchCntrl]);
 
-  const handleEdit = (index) => {
-    setSelectedProject(projectsList[index]);
-    setIsModalOpen(true);
-  };
 
   const handleDelete = async (project_id) => {
     console.log(project_id);
     try {
       const accessToken = localStorage.getItem("accessToken");
       const response = await fetch(
-        `${API_BASE_URL}/profile/cv/project/delete`,
+        `${API_BASE_URL}/profile/github`,
         {
           method: "DELETE",
           headers: {
@@ -128,7 +117,6 @@ const GithubProjects = ({ githubUrl }) => {
             key={`project-${index}`}
             index={index}
             {...item}
-            onEdit={handleEdit}
             onDelete={handleDelete}
             url={githubUrl}
           />
