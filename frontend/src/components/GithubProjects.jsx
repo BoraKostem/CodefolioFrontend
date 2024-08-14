@@ -96,7 +96,7 @@ const GithubProjects = ({ githubUrl }) => {
             Authorization: `Bearer ${accessToken}`,
           },
 
-          body: JSON.stringify({ project_id: project_id }),
+          body: JSON.stringify({ project_ids : project_id }),
         }
       );
       if (response.ok) {
