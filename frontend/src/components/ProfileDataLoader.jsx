@@ -10,6 +10,7 @@ import Languages from './Languages';
 import Certificate from './Certificate';
 import Footer from './Footer';
 import { API_BASE_URL } from '../utils/config';
+import GithubProjects from './GithubProjects';
 
 
 export const fetchContext = React.createContext();
@@ -84,11 +85,12 @@ const ProfileDataLoader = () => {
                 {profileData.cv_certifications.length > 0 && (<Certificate data={profileData.cv_certifications} />)}
                 {profileData.cv_skills.length > 0  && (<Skills data={profileData.cv_skills} />)}
                 {profileData.cv_languages > 0 && (<Languages data={profileData.cv_languages} />)}
+                <GithubProjects githubUrl={profileData.github_url}/>
                 </div>
                 </fetchContext.Provider>
-                <div>
+                
                 <Footer/>
-                </div>
+                
               </div>
               ) : ( 
                 <div className='min-h-screen w-full overflow-hidden mx-auto px-50 flex justify-center items-center'>

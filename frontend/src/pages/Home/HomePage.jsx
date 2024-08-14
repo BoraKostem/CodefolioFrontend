@@ -42,7 +42,9 @@ function HomePage() {
   return (
     <div>
       {isAuthenticated ? <UserNavbar /> : <Navbar />}
+      <div>
       <SearchBar />
+      </div>
       <Footer />
     </div>
   );

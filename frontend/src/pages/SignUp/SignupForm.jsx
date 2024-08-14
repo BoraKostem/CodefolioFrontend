@@ -29,7 +29,8 @@ const SignupForm = () => {
 
     const handleSignup = async (values, { setSubmitting, resetForm }) => {
         try {
-            const response = await fetch(`${API_BASE_URL}/register`, {
+            // Step 1: Sign up the user
+            const signupResponse = await fetch(`${API_BASE_URL}/register`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -40,22 +41,48 @@ const SignupForm = () => {
                     name: values.fullName
                 })
             });
-
-            if (!response.ok) {
+    
+            if (!signupResponse.ok) {
                 throw new Error('Failed to sign up');
             }
-
-            const data = await response.json();
-            console.log('User created successfully:', data);
+    
+            const signupData = await signupResponse.json();
+            console.log('User created successfully:', signupData);
+    
+            // Step 2: Log in the user
+            const loginResponse = await fetch(`${API_BASE_URL}/login`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    email: values.email,
+                    password: values.password
+                })
+            });
+    
+            if (!loginResponse.ok) {
+                throw new Error('Failed to log in');
+            }
+    
+            const loginData = await loginResponse.json();
+            console.log('User logged in successfully:', loginData);
+    
+            // Store the token or user info if needed
+            localStorage.setItem('accessToken', loginData.access); // Example token storage
+            // Alternatively, set it in state or context as per your app structure
+    
+            // Step 3: Navigate to the dashboard
             navigate('/dashboard');
             resetForm();
             
         } catch (error) {
-            console.error('Error signing up:', error);
+            console.error('Error:', error);
             alert('Failed to sign up, please try again.');
         }
         setSubmitting(false);
     };
+    
 
     return (
         <div className="w-full h-screen flex flex-col codefoliobg-gray items-center">
@@ -96,7 +123,7 @@ const SignupForm = () => {
                                     className="w-full py-4 my-2 bg-transparent border-b outline-none codefolio-white"
                                 />
                                 <FontAwesomeIcon
-                                    icon={showPassword ? faEyeSlash : faEye}
+                                    icon={showPassword ? faEye : faEyeSlash}
                                     onClick={() => setShowPassword(!showPassword)}
                                     className='absolute right-4 top-6 cursor-pointer codefolio-white'
                                 />
@@ -110,7 +137,7 @@ const SignupForm = () => {
                                     className="w-full py-4 my-2 bg-transparent border-b outline-none codefolio-white"
                                 />
                                 <FontAwesomeIcon
-                                    icon={showConfirmPassword ? faEyeSlash : faEye}
+                                    icon={showConfirmPassword ? faEye : faEyeSlash}
                                     onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                                     className='absolute right-4 top-6 cursor-pointer codefolio-white'
                                 />

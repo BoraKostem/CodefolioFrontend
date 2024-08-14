@@ -85,7 +85,7 @@ const LoginForm = () => {
                                     className='w-full py-4 my-2 bg-transparent border-b outline-none focus:outline-none codefolio-white'
                                 />
                                 <FontAwesomeIcon
-                                    icon={showPassword ? faEyeSlash : faEye}
+                                    icon={showPassword ? faEye : faEyeSlash}
                                     onClick={() => setShowPassword(!showPassword)}
                                     className='absolute right-4 top-6 cursor-pointer codefolio-white'
                                 />
