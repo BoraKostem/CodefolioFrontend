@@ -14,6 +14,7 @@ const SignupForm = () => {
     const initialValues = {
         email: '',
         fullName: '',
+        location: '', // Added location field
         password: '',
         confirmPassword: '',
     };
@@ -21,6 +22,7 @@ const SignupForm = () => {
     const validationSchema = Yup.object({
         email: Yup.string().email('Invalid email format').required('Email is required'),
         fullName: Yup.string().required('Full Name is required'),
+        location: Yup.string().required('Location is required'), // Validation for location
         password: Yup.string().min(6, 'Password must be at least 6 characters').required('Password is required'),
         confirmPassword: Yup.string()
             .oneOf([Yup.ref('password'), null], 'Passwords must match')
@@ -38,7 +40,8 @@ const SignupForm = () => {
                 body: JSON.stringify({
                     email: values.email,
                     password: values.password,
-                    name: values.fullName
+                    name: values.fullName,
+                    location: values.location, // Added location to the request
                 })
             });
     
@@ -114,6 +117,15 @@ const SignupForm = () => {
                                     className="w-full py-4 my-2 bg-transparent border-b outline-none codefolio-white"
                                 />
                                 <ErrorMessage name="fullName" component="div" className="text-red-500 text-sm" />
+                            </div>
+                            <div>
+                                <Field 
+                                    type="text"
+                                    name="location" // New location field
+                                    placeholder="Location"
+                                    className="w-full py-4 my-2 bg-transparent border-b outline-none codefolio-white"
+                                />
+                                <ErrorMessage name="location" component="div" className="text-red-500 text-sm" />
                             </div>
                             <div className='relative'>
                                 <Field 

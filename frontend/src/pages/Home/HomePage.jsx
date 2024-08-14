@@ -45,7 +45,7 @@ function HomePage() {
       <div>
       <SearchBar />
       </div>
-      <Footer />
+      
     </div>
   );
 }

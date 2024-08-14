@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { API_BASE_URL } from '../utils/config';
+import Footer from './Footer';
 
 
 const Home = () => {
@@ -101,12 +102,13 @@ const Home = () => {
                             />
                             <div>
                                 <h2 className="text-lg font-bold">{result.name}</h2>
-                                <p className="text-gray-600">{result.location || ' '}</p>
+                                <p className="text-gray-600 text-start">{result.location || ' '}</p>
                             </div>
                         </div>
                     ))}
                 </div>
             )}
+
         </div>
     );
 }
