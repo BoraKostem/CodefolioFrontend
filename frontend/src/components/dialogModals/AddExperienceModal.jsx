@@ -46,6 +46,7 @@ const AddExperienceModal = ({ isOpen, onRequestClose }) => {
         "end_date": formattedEndDate,
     };
     console.log(newExperience);
+    console.log(fetchCntrl);
 
     try{
         const accessToken = localStorage.getItem('accessToken');
@@ -57,10 +58,11 @@ const AddExperienceModal = ({ isOpen, onRequestClose }) => {
             },
             body: JSON.stringify(newExperience)
         });
-
+        setFetchCntrl(!fetchCntrl);
         if(response.ok) {
             console.log("Added successfully");
-            setFetchCntrl(!fetchCntrl);
+            
+            console.log(fetchCntrl);
             onRequestClose();
         }
 
@@ -82,7 +84,7 @@ const AddExperienceModal = ({ isOpen, onRequestClose }) => {
           <input
             type="text"
             onChange={(e) => setCompanyName(e.target.value)}
-            placeholder="Enter a new skill"
+            placeholder="Enter the company name"
             className="block p-2 border w-5/6 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
           ></input>
         </div>
@@ -91,7 +93,7 @@ const AddExperienceModal = ({ isOpen, onRequestClose }) => {
           <input
             type="text"
             onChange={(e) => setDescription(e.target.value)}
-            placeholder="Enter a new skill"
+            placeholder="Enter the description of your role"
             className="block p-2 border w-5/6 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
           ></input>
         </div>
@@ -100,7 +102,7 @@ const AddExperienceModal = ({ isOpen, onRequestClose }) => {
           <input
             type="text"
             onChange={(e) => setPosition(e.target.value)}
-            placeholder="Enter a new skill"
+            placeholder="Enter you position"
             className="block p-2 border w-5/6 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
           ></input>
         </div>

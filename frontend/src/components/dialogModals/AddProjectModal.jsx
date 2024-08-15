@@ -37,10 +37,11 @@ const AddProjectModal = ({ isOpen, onRequestClose }) => {
             },
             body: JSON.stringify(newProject)
         });
+        setFetchCntrl(!fetchCntrl);
 
         if(response.ok) {
             console.log("Added successfully");
-            setFetchCntrl(!fetchCntrl);
+            
             onRequestClose();         
         }
 
@@ -58,7 +59,7 @@ const AddProjectModal = ({ isOpen, onRequestClose }) => {
         title="Add New Project"
       >
         <div className="flex flex-row my-5 w-full">
-          <label className="w-1/6">Company : </label>
+          <label className="w-1/6">Name : </label>
           <input
             type="text"
             onChange={(e) => setProjectName(e.target.value)}
