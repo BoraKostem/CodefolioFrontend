@@ -19,6 +19,7 @@ import Footer from "./Footer";
 import Chat from "./Chat";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faComment } from '@fortawesome/free-solid-svg-icons';
+import UserGithubProjects from "./UserProfile/UserGithubProjects";
 
 const UserProfile = () => {
   const { id } = useParams();
@@ -99,6 +100,7 @@ const UserProfile = () => {
             {profileData.cv_languages.length > 0 && (
               <UserLanguages data={profileData.cv_languages} />
             )}
+           <UserGithubProjects data={profileData.github_projects} url={profileData.github_url}/>
           </div>
           {/* Add the Chat component here */}
           <div>
