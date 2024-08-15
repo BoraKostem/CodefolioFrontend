@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
-import background from "../../assets/background.png";
+import background from "../../assets/loginPicture.png";
 import Footer from "../../components/Footer";
 
 const LoginForm = () => {

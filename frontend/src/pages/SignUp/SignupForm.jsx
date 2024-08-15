@@ -169,9 +169,11 @@ const SignupForm = () => {
                 <div className='w-full'>
                     <p className='text-sm font-normal codefolio-white'>Already, have an account? <Link to="/login" className='font-semibold underline underline-offset-2 cursor-pointer codefolio-yellow'>Login</Link></p>
                 </div>
+                <Link to={"/"}>
                 <button className='w-full my-2 font-semibold bg-transparent codefolio-yellow codefolio-yellow-border rounded-lg py-4 text-center flex items-center justify-center'>
                             Back to Home
                 </button>
+                </Link>
             </div>
         </div>
     );
