@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { API_BASE_URL } from '../utils/config';
 import Footer from './Footer';
+import profilePic from '../assets/profilepic.png';
 
 
 const Home = () => {
@@ -96,7 +97,7 @@ const Home = () => {
                             onClick={() => handleUserClick(result.id)}
                         >
                             <img 
-                                src={result.profile_photo || 'https://via.placeholder.com/150'}
+                                src={profilePic}
                                 alt={result.name}
                                 className="w-16 h-16 rounded-full mr-4"
                             />
