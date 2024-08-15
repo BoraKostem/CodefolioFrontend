@@ -6,7 +6,7 @@ const Navbar = () => {
     
 
     const buttonClasses =
-        "text-gray-100 font-bold text-sm px-2 py-1 hover:bg-gray-100 hover:text-gray-800 rounded-lg transition duration-300 ";
+        "text-gray-100 font-bold text-sm px-2 py-1 hover:bg-gray-100 hover:text-gray-800 rounded-lg transition duration-300  cursor-pointer";
 
     const buttons = (
         <>
@@ -31,7 +31,7 @@ const Navbar = () => {
       <div className="w-full mx-auto px-4 sm:px-6 lg:px-8 mt-4">
         <div className="flex w-full justify-between h-12">
           <div className="flex flex-row w-full justify-between">
-                    <Link to="/" className="text-xl font-bold" style={{ color: "#F4CE14" }}>
+                    <Link to="/" className="text-xl font-bold  cursor-pointer" style={{ color: "#F4CE14" }}>
                             Codefolio
                         </Link>
                         <div className="hidden md:block">

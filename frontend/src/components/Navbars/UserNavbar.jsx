@@ -10,7 +10,7 @@ const UserNavbar = () => {
   const navigate = useNavigate();
 
   const buttonClasses =
-    "text-gray-100 font-bold text-sm px-2 py-1 hover:bg-gray-100 hover:text-gray-800 rounded-lg transition duration-300";
+    "text-gray-100 font-bold text-sm px-2 py-1 hover:bg-gray-100 hover:text-gray-800 rounded-lg transition duration-300  cursor-pointer";
 
   const buttons = (
     <>
@@ -39,7 +39,7 @@ const UserNavbar = () => {
           <div className="flex flex-row w-full justify-between">
             <Link
               to="/"
-              className="text-xl font-bold"
+              className="text-xl font-bold cursor-pointer"
               style={{ color: "#F4CE14" }}
             >
               Codefolio
