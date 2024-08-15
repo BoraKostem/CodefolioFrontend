@@ -109,9 +109,11 @@ const LoginForm = () => {
                 <div className='w-full'>
                     <p className='text-sm font-normal codefolio-white'>Don't have an account? <Link to="/signup" className='font-semibold underline underline-offset-2 cursor-pointer codefolio-yellow'>Sign up for free</Link></p>
                 </div>
+                <Link to={"/"}>
                 <button className='w-full my-2 font-semibold bg-transparent codefolio-yellow codefolio-yellow-border rounded-lg py- text-center flex items-center justify-center'>
                     Back to Home
                 </button>
+                </Link>
             </div>
 
             {popup.show && (
