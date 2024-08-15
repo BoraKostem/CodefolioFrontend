@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Modal from "react-modal";
 import GenericModal from "./GenericModal";
 import { API_BASE_URL } from "../../utils/config";
+import { fetchContext } from "../ProfileDataLoader";
 
 
 Modal.setAppElement('#root');
@@ -12,6 +13,7 @@ const EditSkillsModal = ({ isOpen, onRequestClose, skills, onDelete, onAdd }) =>
   const [newSkill, setNewSkill] = useState('');
   const [addArr, setAddArr] = useState([]);
 
+  const [fetchCntrl, setFetchCntrl] = useContext(fetchContext);
 
 
   const handleAdd = async () => {
@@ -41,6 +43,7 @@ const EditSkillsModal = ({ isOpen, onRequestClose, skills, onDelete, onAdd }) =>
               },
               body: JSON.stringify({skill})
           });
+          setFetchCntrl(!fetchCntrl);
           if (response.ok){
               console.log("new skill added successfully");
               onAdd(skill);
@@ -70,7 +73,7 @@ const EditSkillsModal = ({ isOpen, onRequestClose, skills, onDelete, onAdd }) =>
             }
         }
 
-        
+       
         setAddArr([]);
         setDeletionArr([]);
         console.log("array deleted");

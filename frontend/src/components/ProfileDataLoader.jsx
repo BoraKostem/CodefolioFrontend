@@ -85,7 +85,7 @@ const ProfileDataLoader = () => {
                 {profileData.cv_certifications.length > 0 && (<Certificate data={profileData.cv_certifications} />)}
                 {profileData.cv_skills.length > 0  && (<Skills data={profileData.cv_skills} />)}
                 {profileData.cv_languages > 0 && (<Languages data={profileData.cv_languages} />)}
-                <GithubProjects githubUrl={profileData.github_url}/>
+                {profileData.github_url != '' && (<GithubProjects githubUrl={profileData.github_url}/>)}
                 </div>
                 </fetchContext.Provider>
                 

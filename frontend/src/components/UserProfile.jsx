@@ -100,7 +100,7 @@ const UserProfile = () => {
             {profileData.cv_languages.length > 0 && (
               <UserLanguages data={profileData.cv_languages} />
             )}
-           <UserGithubProjects data={profileData.github_projects} url={profileData.github_url}/>
+           {profileData.github_url != '' && (<UserGithubProjects data={profileData.github_projects} url={profileData.github_url}/>)}
           </div>
           {/* Add the Chat component here */}
           <div>
