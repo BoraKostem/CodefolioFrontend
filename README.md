@@ -51,9 +51,9 @@ cd frontend
 
 npm install
 
-**3.Run the Development Server**
+**3.Compile the code**
 
-npm run
+npm start
 
 Open your browser and go to http://localhost:3000 to view the application.
 
