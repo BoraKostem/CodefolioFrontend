@@ -1,4 +1,4 @@
-# CodefolioFrontend
+# Codefolio
 
 Codefolio is a React-based platform designed for software developers to create, manage, and showcase their professional profiles. The project integrates with GitHub and Medium, providing a comprehensive tool for developers to display their skills, experiences, and projects.
 
