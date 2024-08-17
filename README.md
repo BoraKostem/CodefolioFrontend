@@ -54,3 +54,32 @@ Codefolio-Frontend/
 │   ├── index.js          # Entry point
 │   └── ...
 └── package.json          # Project configuration
+
+
+
+## Installation
+
+Before you begin, ensure you have the following installed on your system:
+
+- **Node.js**: [Download and install Node.js](https://nodejs.org/) (includes npm, the Node.js package manager).
+- **Git**: [Download and install Git](https://git-scm.com/).
+
+## Getting Started
+
+Follow these steps to set up and run the React frontend project on your local machine.
+
+### 1. Clone the Repository
+
+First, clone the repository from GitHub using Git.
+
+```bash
+git clone <https://github.com/BoraKostem/CodefolioFrontend.git>
+cd <frontend>
+
+### 2.Install Dependencies
+
+npm install
+
+### 3.Run the Development Server
+
+npm run
