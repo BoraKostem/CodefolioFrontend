@@ -39,18 +39,18 @@ Before you begin, ensure you have the following installed on your system:
 
 Follow these steps to set up and run the React frontend project on your local machine.
 
-*** 1. Clone the Repository ***
+**1. Clone the Repository**
 
 First, clone the repository from GitHub using Git.
 
 git clone <https://github.com/BoraKostem/CodefolioFrontend.git>
 cd <frontend>
 
-*** 2.Install Dependencies ***
+**2.Install Dependencies**
 
 npm install
 
-*** 3.Run the Development Server ***
+**3.Run the Development Server**
 
 npm run
 
