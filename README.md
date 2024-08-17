@@ -44,7 +44,8 @@ Follow these steps to set up and run the React frontend project on your local ma
 First, clone the repository from GitHub using Git.
 
 git clone <https://github.com/BoraKostem/CodefolioFrontend.git>
-cd <frontend>
+
+cd frontend
 
 **2.Install Dependencies**
 
