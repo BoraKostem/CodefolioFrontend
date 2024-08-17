@@ -14,7 +14,6 @@ Codefolio is a React-based platform designed for software developers to create, 
 
 - **Profile Creation:** Developers can create detailed profiles highlighting their skills, experiences, projects, and more.
 - **GitHub Integration:** Automatically showcase GitHub repositories and contributions.
-- **Medium Integration:** Display blog posts and articles from Medium.
 - **CV Parsing:** Upload CVs to auto-generate profile sections.
 - **Chatbot Interaction:** AI-powered chatbot that answers questions about skills and experiences.
 - **Recruiter Tools:** Features for recruiters to search and filter developers based on specific skills.
