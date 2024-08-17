@@ -31,31 +31,6 @@ Codefolio is a React-based platform designed for software developers to create, 
   - **FontAwesome:** For using scalable vector icons.
   - **Tailwind CSS:** A utility-first CSS framework for styling.
 
-## Project Structure
-
-```bash
-Codefolio-Frontend/
-├── public/
-│   ├── index.html        # The main HTML file
-│   └── ...
-├── src/
-│   ├── components/       # Reusable components
-│   │   ├── Header.js     # Header component
-│   │   ├── Profile.js    # Profile component
-│   │   └── ...
-│   ├── pages/            # Application pages
-│   │   ├── Home.js       # Home page
-│   │   ├── Dashboard.js  # Dashboard page
-│   │   └── ...
-│   ├── services/         # API calls and services
-│   │   ├── api.js        # API service
-│   │   └── ...
-│   ├── App.js            # Main application component
-│   ├── index.js          # Entry point
-│   └── ...
-└── package.json          # Project configuration
-
-
 
 ## Installation
 
@@ -72,7 +47,6 @@ Follow these steps to set up and run the React frontend project on your local ma
 
 First, clone the repository from GitHub using Git.
 
-```bash
 git clone <https://github.com/BoraKostem/CodefolioFrontend.git>
 cd <frontend>
 
